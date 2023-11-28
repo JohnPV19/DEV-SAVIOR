@@ -1,30 +1,29 @@
-import { useContext, useState } from 'react'; 
-import {AuthContext}  from '../../Context/auth.context.jsx';
 import axios from 'axios';
+import { useState } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 
 const API_URL = "http://localhost:5005";
 
-function LoginPage(){
+function SignUpPage(){
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [name, setName] = useState("")
     const [error, SetError] = useState("")
 
     const navigate = useNavigate();
-    //use shared functions provided bt AuthContext 
-    const {storeToken, authenticateUser} = useContext(AuthContext)
 
     const handleLoginSubmit = (e) => {
+        // prevent default actions of the form submission e.g.: refreshing the page
         e.preventDefault();
 
+
+        // Create a request body object
         const requestBody ={email, password, name};
 
-        axios.post(`${API_URL}/auth/login`,requestBody)
-            .then((response)=>{
-                storeToken(response.data.authToken);
-                authenticateUser();
-                navigate('/')
+        axios.post(`${API_URL}/auth/signup`, requestBody)
+            .then(()=>{
+                navigate('/login');
             })
             .catch((error)=>{
                 const errorDescription = error.response.data.message;
@@ -32,9 +31,11 @@ function LoginPage(){
             })
     }
 
-    return( 
+
+
+    return(
         <div>
-            <h3>Login Page</h3>
+            <h1>SignUp Page</h1>
             <form onSubmit = {handleLoginSubmit}>
                 <div>
                     <label>Email:</label>
@@ -45,6 +46,10 @@ function LoginPage(){
                     <input type="password" name="password" onChange={(e)=> setPassword(e.target.value)} />
                 </div>
                 <div>
+                     <label>Usename:</label>
+                     <input type="text" name="usename" onChange={(e)=> setName(e.target.value)} />
+                </div>
+                <div>
                     <button type ="submit">Sign Up</button>
                 </div>
                 {error && <p>{error}</p>}
@@ -52,5 +57,6 @@ function LoginPage(){
         </div>
     )
 }
-    
-export default LoginPage
+
+
+export default SignUpPage
