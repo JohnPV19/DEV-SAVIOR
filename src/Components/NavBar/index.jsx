@@ -1,5 +1,6 @@
 import '/src/Components/Navbar/index.css'
 import { Link } from "react-router-dom";
+import SearchBar from '../SearchBar';
 
 export default function Navbar(){
 
@@ -10,7 +11,8 @@ export default function Navbar(){
                     <Link to="/">Home</Link>
                     <Link to="/newpost">New Post</Link>
                     <Link to="/login">Login</Link>
-                    <Link to="/signuppage">SignUp</Link>
+                    <Link to="/signup">SignUp</Link>
+                    <SearchBar/>
                 </div>
             </div>
         </nav>
