@@ -10,7 +10,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
  
   <Router>
      <AuthProviderWrapper>
-    <App />
+        <App/>
      </AuthProviderWrapper>
  </Router>
 

@@ -4,6 +4,7 @@ import HomePage from './Pages/Homepage'
 import Navbar from './Components/NavBar'
 import SignUpPage from './Pages/SignUp'
 import LoginPage from './Pages/Login';
+import NewPost from './Pages/CreatePost'
 
 
 
@@ -17,7 +18,8 @@ function App() {
           <Routes>
            <Route path="/" element={<HomePage/>}/>
            <Route path="/signup" element= {<SignUpPage/>}/>
-           <Route path="/login" element= {<LoginPage/>}/>  
+           <Route path="/login" element= {<LoginPage/>}/> 
+           <Route path="/newpost" element= {<NewPost/>}/> 
           </Routes>
        </div>
   )

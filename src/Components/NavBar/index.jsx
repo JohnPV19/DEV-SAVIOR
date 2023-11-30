@@ -2,7 +2,13 @@ import '/src/Components/Navbar/index.css'
 import { Link } from "react-router-dom";
 import SearchBar from '../SearchBar';
 
+
 export default function Navbar(){
+    const handleSearch = (searchTerm) => {
+        // Handle the search logic in the Navbar component
+        console.log('Search term in Navbar:', searchTerm);
+        // You can perform other actions with the search term here
+      };
 
     return (
         <nav>
@@ -12,7 +18,7 @@ export default function Navbar(){
                     <Link to="/newpost">New Post</Link>
                     <Link to="/login">Login</Link>
                     <Link to="/signup">SignUp</Link>
-                    <SearchBar/>
+                    <SearchBar onSearch={handleSearch}/>
                 </div>
             </div>
         </nav>
