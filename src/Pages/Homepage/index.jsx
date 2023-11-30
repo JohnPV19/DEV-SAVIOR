@@ -1,12 +1,14 @@
 import React from 'react'
 import axios from 'axios'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, navigate } from 'react'
+import { Link, useParams } from "react-router-dom"
 
 
 const API_URL = "http://localhost:5005";
 
 
 function HomePage() {
+
 
   const [postsList, setPostsList] = useState([]);
 
@@ -32,7 +34,7 @@ function HomePage() {
               {postsList.map((post, index)=>{
                 return(
                     <div key={index}>
-                      <p>{post.title}</p>
+                      <Link to={`/api/posts/${post._id}`}>{post.title}</Link>
                     </div>
                 )
               })}
