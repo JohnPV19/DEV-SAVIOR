@@ -9,9 +9,7 @@ import ViewPost from './Pages/ViewPost'
 import EditPost from './Pages/EditPostPage'
 
 
-
 function App() {
-
 
   return ( 
      

@@ -34,10 +34,29 @@ function ViewPost() {
   }, [])
  
   
-  const handleEditNavigate = () => {
+  const handleEditNavigate =()=>{
     navigate(`/api/posts/edit/${_id}`);
   };
 
+  const handleDeleteButton =()=>{
+    // Show a confirmation window
+    const isConfirmed = window.confirm("Are you sure you want to delete this post?");
+      // If the user says "Yes":
+    if (isConfirmed){
+      axios
+    .delete(`${API_URL}/api/posts/${_id}`)
+    .then(()=>{
+      console.log("Post deleted!" ); 
+        navigate(`/`)
+    })
+    .catch((error)=> console.log("Failed to delete post", error));
+    } 
+      // If the user says "No":
+    else {
+      console.log("Deletion canceled");
+    }
+    
+  };
 
 
   return ( 
@@ -55,7 +74,7 @@ function ViewPost() {
             <p>Text: {clickedPostText}</p>
             <p>Image: {clickedPostImg}</p>
             <button onClick={handleEditNavigate}>Edit</button>
-            <button>Delete</button>
+            <button onClick={handleDeleteButton}>Delete</button>
           </div>
         }
         </div>
