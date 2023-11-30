@@ -6,6 +6,7 @@ import SignUpPage from './Pages/SignUp'
 import LoginPage from './Pages/Login';
 import NewPost from './Pages/CreatePost'
 import ViewPost from './Pages/ViewPost'
+import EditPost from './Pages/EditPostPage'
 
 
 
@@ -22,6 +23,7 @@ function App() {
            <Route path="/login" element= {<LoginPage/>}/> 
            <Route path="/newpost" element= {<NewPost/>}/> 
            <Route path="/api/posts/:_id" element= {<ViewPost/>}/> 
+           <Route path="/api/posts/edit/:_id" element= {<EditPost/>}/> 
           </Routes>
        </div>
   )

@@ -1,7 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import { useEffect, useState, navigate } from 'react'
-import { Link, useParams } from "react-router-dom"
+import { Link, useNavigate, useParams } from "react-router-dom"
 
 
 const API_URL = "http://localhost:5005";
@@ -9,8 +9,9 @@ const API_URL = "http://localhost:5005";
 
 function ViewPost() {
 
+  const navigate = useNavigate();
+
   const {_id} = useParams();
-  console.log(_id)
 
   const [clickedPost, setClickedPost] = useState([]);
   const [clickedPostTitle, setClickedPostTitle] = useState("");
@@ -28,11 +29,14 @@ function ViewPost() {
       setClickedPostTitle(postData.title);
       setClickedPostText(postData.bodyText);
       setClickedPostImg(postData.img);
-      console.log(clickedPost)
     })
-    .catch((error)=>console.log({error: "Failed to fetch specified post"}))
+    .catch(()=>console.log({error: "Failed to fetch specified post"}))
   }, [])
  
+  
+  const handleEditNavigate = () => {
+    navigate(`/api/posts/edit/${_id}`);
+  };
 
 
 
@@ -50,7 +54,7 @@ function ViewPost() {
             <p>Title: {clickedPostTitle}</p> 
             <p>Text: {clickedPostText}</p>
             <p>Image: {clickedPostImg}</p>
-            <button>Edit</button>
+            <button onClick={handleEditNavigate}>Edit</button>
             <button>Delete</button>
           </div>
         }
