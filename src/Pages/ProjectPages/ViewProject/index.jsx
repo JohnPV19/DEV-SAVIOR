@@ -37,6 +37,7 @@ function Projects() {
                 return(
                     <div key={index}>
                         <div>
+                            <p>Ttitle</p>
                             <Link to={`/api/projects/${projects._id}`}>{projects.projectName}</Link>
                         </div>
                         <div>
