@@ -65,11 +65,35 @@ useEffect(() => {
 
       {/* Display suggestions */}
       {suggestions.length > 0 && (
-        <ul>
-          {suggestions.map((suggestion, index) => (
-      <li key={index}>{JSON.stringify(suggestion)}</li>
-    ))}
-        </ul>
+        <ul> 
+          <h2>Titles</h2>
+        {suggestions.map((suggestion, index) => (
+          <li key={index}>
+            <Link to={`/result/${suggestion._id}`}>
+              <div>
+               
+                <h3>{suggestion.title}</h3>
+              </div>
+            </Link>
+            
+          </li>
+          
+        )
+        )}
+        <h2>Content</h2>
+        {suggestions.map((suggestion, index) => (
+          <li key={index}>
+            <Link to={`/result/${suggestion._id}`}>
+              <div>
+                <p>{suggestion.bodyText}</p>
+              </div>
+            </Link>
+            
+          </li>
+          
+        )
+        )}
+      </ul>
       )}
     </div>
   );
