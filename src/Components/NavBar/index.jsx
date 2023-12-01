@@ -16,8 +16,11 @@ export default function Navbar(){
                 <div id="nav-links">
                     <Link to="/">Home</Link>
                     <Link to="/newpost">New Post</Link>
+                    <Link to="/api/projects/upload">New Projects</Link>
+                    <Link to="/projects">Projects</Link>
                     <Link to="/login">Login</Link>
                     <Link to="/signup">SignUp</Link>
+
                     <SearchBar onSearch={handleSearch}/>
                 </div>
             </div>
