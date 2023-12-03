@@ -1,85 +1,62 @@
-import React from 'react'
-import axios from 'axios'
-import { useEffect, useState, navigate } from 'react'
-import { Link, useNavigate, useParams } from "react-router-dom"
-
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
+import Prism from 'prismjs';
+import 'prismjs/themes/prism-okaidia.css';
 
 const API_URL = "http://localhost:5005";
 
-
 function ProjectView() {
+  const { fileId } = useParams();
+  const [projectDetails, setProjectDetails] = useState([]);
+  const [projectName, setProjectName] = useState([]);
+  const [projectContent, setProjectContent] = useState([]);
+  const [projectSaveDate, setProjectSaveDate] = useState([]);
+  const [, setForceUpdate] = useState(false);
 
-  const navigate = useNavigate();
+  useEffect(() => {
+    let isMounted = true;
 
-  const {_id} = useParams();
-
-  const [clickedProject, setClickedProject] = useState([]);
-  const [clickedProjectTitle, setClickedProjectTitle] = useState("");
-  const [clickedProjectDescription, setClickedProjectDescription] = useState("");
-  const [clickedProjectFile, setClickedProjectFile] = useState("");
-
-
-    // Fetches and saves clicked Post properties from the Homepage
-  useEffect(()=>{
     axios
-    .get(`${API_URL}/api/projects/${_id}`)
-    .then((response)=>{
-      const projectData = response.data;
-      setClickedProject(projectData);
-      setClickedProjectTitle(projectData.projectName);
-      setClickedProjectDescription(projectData.description);
-      setClickedProjectFile(projectData.files);
-    })
-    .catch(()=>console.log({error: "Failed to fetch specified post"}))
-  }, [])
- 
-  
-  const handleEditNavigate =()=>{
-    navigate(`/api/projects/edit/${_id}`);
-  };
+      .get(`${API_URL}/api/projects/${fileId}`)
+      .then((response) => {
+        const projectData = response.data;
+        setProjectDetails(projectData);
+        setProjectName(projectData.fileName);
+        setProjectContent(projectData.content);
+        setProjectSaveDate(projectData.saveDate);
+        Prism.highlightAll();
+        setForceUpdate((prev) => !prev);
+      })
+      .catch((error) => console.log(error));
 
-  const handleDeleteButton =()=>{
-    // Show a confirmation window
-    const isConfirmed = window.confirm("Are you sure you want to delete this project?");
-      // If the user says "Yes":
-    if (isConfirmed){
-      axios
-    .delete(`${API_URL}/api/projects/${_id}`)
-    .then(()=>{
-      console.log("Project deleted!" ); 
-        navigate(`/`)
-    })
-    .catch((error)=> console.log("Failed to delete project", error));
-    } 
-      // If the user says "No":
-    else {
-      console.log("Deletion canceled");
-    }
-    
-  };
+      return () => {
+        isMounted = false;
+      };
+  }, [fileId]);
 
-
-  return ( 
+  return (
     <div>
-        <h1>Project view</h1>
+      <h1>File Viewer</h1>
+      {projectDetails &&
+      <pre>
         <div>
-          {!clickedProject &&  // Renders error message if clicked Post wasn't found/properly saved
-          <div>
-            <p>Sorry, we couldn't fetch that specific project</p>
-          </div>
-          }
-          {clickedProject && // Renders clicked Post details
-          <div>
-            <p>Title: {clickedProjectTitle}</p> 
-            <p>Description: {clickedProjectDescription}</p>
-            <p>File: {clickedProjectFile}</p>
-            <button onClick={handleEditNavigate}>Edit</button>
-            <button onClick={handleDeleteButton}>Delete</button>
-          </div>
-        }
+          <h3>File: </h3> <br />
+          <code className="language-javascript">{projectName}</code>
         </div>
+        <div>
+          <h3>Code: </h3>
+          <code className="language-javascript">{projectContent}</code>
+        </div>
+        <div>
+          <h3>Date uploaded: </h3>
+          <code className="language-javascript">{projectSaveDate}</code>
+        </div>
+    </pre>
+      }
+      
     </div>
-  )
+  );
 }
 
-export default ProjectView
+export default ProjectView;
