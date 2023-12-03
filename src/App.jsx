@@ -11,6 +11,7 @@ import EditPost from './Pages/EditPostPage'
 import NewProject from './Pages/ProjectPages/UploadProject'
 import ProjectView from './Pages/ProjectPages/ProjecView'
 import Projects from './Pages/ProjectPages/ViewProject'
+import ProfilePage from './Pages/ProfilePage'
 
 function App() {
 
@@ -24,6 +25,7 @@ function App() {
            <Route path="/login" element= {<LoginPage/>}/>
            <Route path="/newpost" element= {<NewPost/>}/> 
            <Route path="/projects" element={<Projects/>}/>
+           <Route path="/profile/:_id" element={<ProfilePage/>}/>
            <Route path="/api/projects/upload" element= {<NewProject/>}/>
            <Route path="/api/posts/:_id" element= {<ViewPost/>}/> 
            <Route path="/api/posts/edit/:_id" element= {<EditPost/>}/> 
