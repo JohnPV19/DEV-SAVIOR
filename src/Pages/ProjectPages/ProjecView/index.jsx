@@ -1,57 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import Prism from 'prismjs';
-import 'prismjs/themes/prism-okaidia.css';
-
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { okaidia } from 'react-syntax-highlighter/dist/esm/styles/prism';
 const API_URL = "http://localhost:5005";
-
-
 function ProjectView() {
   const { fileId } = useParams();
   const [projectDetails, setProjectDetails] = useState(null);
-
-  const [projectName, setProjectName] = useState([]);
-  const [projectContent, setProjectContent] = useState([]);
-  const [projectSaveDate, setProjectSaveDate] = useState([]);
-  const [, setForceUpdate] = useState(false);
-
-  useEffect(() => { 
-    let isMounted = true;
-
-    axios
-      .get(`${API_URL}/api/projects/${fileId}`)
-      .then((response) => {
-        const projectData = response.data;
-        setProjectDetails(projectData);
-        setProjectName(projectData.fileName);
-        setProjectContent(projectData.content);
-        setProjectSaveDate(projectData.saveDate);
-        Prism.highlightAll();
-        setForceUpdate((prev) => !prev);
-      })
-      .catch((error) => console.log(error));
-
-      return () => {
-        isMounted = false;
-      };
-  }, [fileId]);
-
-
   const getLanguageClass = (fileName) => {
     const fileExtension = fileName.split('.').pop().toLowerCase();
-
-    // Map file extensions to Prism language classes
     const languageMap = {
       // Javascript and React related files
-      js: 'language-javascript', 
+      js: 'language-javascript',
         'package.json': 'language-json',
         'package-lock.json': 'language-json',
       jsx: 'language-jsx',
       css: 'language-css',
       html: 'language-html',
       json: 'language-json',
-      ejs: 'language-html', 
+      ejs: 'language-html',
       pug: 'language-pug',
       md: 'language-markdown',
       scss: 'language-scss',
@@ -65,45 +32,51 @@ function ProjectView() {
       java: 'language-java',  // Java
       cs: 'language-csharp',  // C#
       cpp: 'language-cpp',  // C++
-      h: 'language-cpp', // Assuming header files are associated with C++ code
+      h: 'language-cpp', 
       php: 'language-php',  // PHP
       ts: 'language-typescript',  // TypeScript
-      tsx: 'language-tsx', 
-    };
-
-    // Use the mapped language class or default to 'language-text'
+      tsx: 'language-tsx',
+  };
     return languageMap[fileExtension] || 'language-text';
   };
-
-
-
+  useEffect(() => {
+    axios
+      .get(`${API_URL}/api/projects/${fileId}`)
+      .then((response) => {
+        const projectData = response.data;
+        setProjectDetails(projectData);
+      })
+      .catch((error) => console.log(error));
+  }, [fileId]);
   return (
     <div>
       <h1>File Viewer</h1>
-      {projectDetails &&
-      <pre>
+      {projectDetails && (
         <div>
-        <h3>File: </h3> <br />
-            <code className={getLanguageClass(projectDetails.fileName)}>
-              {projectDetails.fileName}
-            </code>
+          <h3 style={{ color: 'blue' }}>File:</h3>
+          <SyntaxHighlighter language="plaintext" style={okaidia}>
+            {projectDetails.fileName}
+          </SyntaxHighlighter>
+          <h3 style={{ color: 'green' }}>Code:</h3>
+          <SyntaxHighlighter
+            language={getLanguageClass(projectDetails.fileName)}
+            style={okaidia}
+            PreTag="div"
+            CodeTag="div"
+            customStyle={{
+              backgroundColor: 'black', // Background color of the code block
+              padding: '10px',
+            }}
+          >
+            {projectDetails.content}
+          </SyntaxHighlighter>
+          <h3 style={{ color: 'red' }}>Date uploaded:</h3>
+          <SyntaxHighlighter language="plaintext" style={okaidia}>
+            {projectDetails.saveDate}
+          </SyntaxHighlighter>
         </div>
-        <div>
-        <h3>Code: </h3>
-            <code
-              className={getLanguageClass(projectDetails.fileName)}
-              dangerouslySetInnerHTML={{ __html: projectDetails.content }}
-            />
-        </div>
-        <div>
-        <h3>Date uploaded: </h3>
-            <code className="language-javascript">{projectDetails.saveDate}</code>
-        </div>
-    </pre>
-      }
-      
+      )}
     </div>
   );
 }
-
 export default ProjectView;
