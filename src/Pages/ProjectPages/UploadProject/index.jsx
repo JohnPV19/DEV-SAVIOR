@@ -1,20 +1,22 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import Dropzone from 'react-dropzone';
 import { v4 as uuidv4 } from 'uuid';
-
+import { AuthContext } from '../../../Context/auth.context';
 
 const API_URL = "http://localhost:5005";
-
 
 
 function NewProject() {
 
   const navigate = useNavigate();
+  const authContext = useContext(AuthContext); 
 
   const handleFileUpload = async (acceptedFiles) => {
+    const username = authContext.user.username
+    console.log(`Creating project of "${username}"...`)  // DEBUGGER
     console.log('Accepted Files:', acceptedFiles);
     if (acceptedFiles.length > 0) {
       const file = acceptedFiles[0];
@@ -26,6 +28,7 @@ function NewProject() {
       const response = await axios.post(`${API_URL}/api/projects/upload`, {
         fileName: file.name,
         content,
+        username: username,
       });
 
       const savedProject = response.data;

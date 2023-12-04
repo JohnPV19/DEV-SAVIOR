@@ -27,6 +27,7 @@ export function AuthProviderWrapper(props) {
           setIsLoggedIn(true);
           setIsLoading(false);
           setUser(userData);
+          console.log("Logged in as:", userData.username)
         })
         .catch((error) => {
           setIsLoggedIn(false);
@@ -37,6 +38,7 @@ export function AuthProviderWrapper(props) {
       setIsLoggedIn(false);
       setIsLoading(false);
       setUser(null);
+      console.log("Failed to log")
     }
   };
 

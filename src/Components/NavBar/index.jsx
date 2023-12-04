@@ -14,13 +14,14 @@ export default function Navbar(){
         <nav>
             <div id="inner-nav">
                 <div id="nav-links">
-                    <Link to="/">Home</Link>
-                    <Link to="/newpost">New Post</Link>
-                    <Link to="/api/projects/upload">New Projects</Link>
-                    <Link to="/projects">Projects</Link>
-                    <Link to="/login">Login</Link>
-                    <Link to="/signup">SignUp</Link>
-
+                    <Link to="/"> Home </Link>
+                    <Link to="/newpost"> New Post </Link>
+                    <Link to="/api/projects/upload"> NewProjects </Link>
+                    <Link to="/projects"> Projects </Link>
+                    <Link to="/login"> Login </Link>
+                    <Link to="/signup"> SignUp </Link>
+                    <Link to="/projects"> Projects </Link>
+                    <Link to="/profile/:_id"> Profile </Link>
                     <SearchBar onSearch={handleSearch}/>
                 </div>
             </div>

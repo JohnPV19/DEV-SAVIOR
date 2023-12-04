@@ -17,6 +17,7 @@ function ViewPost() {
   const [clickedPostTitle, setClickedPostTitle] = useState("");
   const [clickedPostText, setClickedPostText] = useState("");
   const [clickedPostImg, setClickedPostImg] = useState("");
+  const [clickedPostUser, setClickedPostUser] = useState("");
 
 
     // Fetches and saves clicked Post properties from the Homepage
@@ -29,6 +30,8 @@ function ViewPost() {
       setClickedPostTitle(postData.title);
       setClickedPostText(postData.bodyText);
       setClickedPostImg(postData.img);
+      setClickedPostUser(postData.username);
+      console.log(`Viewing post of "${postData.username}"`) // DEBUGGER
     })
     .catch(()=>console.log({error: "Failed to fetch specified post"}))
   }, [])
@@ -73,6 +76,7 @@ function ViewPost() {
             <p>Title: {clickedPostTitle}</p> 
             <p>Text: {clickedPostText}</p>
             <p>Image: {clickedPostImg}</p>
+            <p>Author: <Link to="">{clickedPostUser}</Link></p>
             <button onClick={handleEditNavigate}>Edit</button>
             <button onClick={handleDeleteButton}>Delete</button>
           </div>

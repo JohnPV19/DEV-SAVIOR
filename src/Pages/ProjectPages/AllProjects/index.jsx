@@ -36,15 +36,11 @@ function Projects() {
               {projectsList.map((projects, index)=>{
                 return(
                     <div key={index}>
-                        <div>
-                            <p>Ttitle</p>
-                            <Link to={`/api/projects/${projects._id}`}>{projects.projectName}</Link>
+                        <div> 
+                          <p>Title: <Link to="{`/api/projects/${projects._id}`}">{projects.fileName}</Link></p>
                         </div>
                         <div>
-                            <p>Description: <br />{projects.description}</p>
-                        </div>
-                        <div>
-                            <Link to={`/api/projects/${projects._id}`}>{projects.contributors}</Link>
+                        <p>by: <Link to="{`/api/projects/${projects._id}`}">{projects.username}</Link></p>
                         </div>
                     </div>
                 )

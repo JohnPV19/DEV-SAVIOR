@@ -1,6 +1,16 @@
-import React from 'react'
+import React, { useContext } from 'react';
+import axios from 'axios'
+import { useEffect, useState } from 'react'
+import { Link, useParams, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../Context/auth.context';
 
 function ProfilePage() {
+
+    const navigate = useNavigate();
+    const authContext = useContext(AuthContext); 
+
+    const {username, email} = authContext.user
+
   return (
     <div>
         <div>
@@ -8,11 +18,11 @@ function ProfilePage() {
         </div>
         <div>
             <h4>Username:</h4> 
-            <p>user_username</p>
+            <p>{username}</p>
         </div>
         <div> 
             <h4>E-mail:</h4> 
-            <p>user_email</p>
+            <p>{email}</p>
         </div>
         <div>
             <h4>Projects:</h4>

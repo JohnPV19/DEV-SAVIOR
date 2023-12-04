@@ -59,7 +59,7 @@ function ProjectView() {
           <SyntaxHighlighter language="plaintext" style={okaidia}>
             {projectDetails.fileName}
           </SyntaxHighlighter>
-          <h3 style={{ color: 'green' }}>Code:</h3>
+          <h3 style={{ color: 'blue' }}>Code:</h3>
           <SyntaxHighlighter
             language={getLanguageClass(projectDetails.fileName)}
             style={okaidia}
@@ -72,10 +72,11 @@ function ProjectView() {
           >
             {projectDetails.content}
           </SyntaxHighlighter>
-          <h3 style={{ color: 'red' }}>Date uploaded:</h3>
+          <h3 style={{ color: 'green' }}>Date uploaded:</h3>
           <SyntaxHighlighter language="plaintext" style={okaidia}>
             {projectDetails.saveDate}
           </SyntaxHighlighter>
+          <p>Author: <a href="/">{projectDetails.username}</a></p>
         </div>
       )}
     </div>
