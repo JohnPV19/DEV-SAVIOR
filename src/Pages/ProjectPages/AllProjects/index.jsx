@@ -37,10 +37,10 @@ function Projects() {
                 return(
                     <div key={index}>
                         <div> 
-                          <p>Title: <Link to="{`/api/projects/${projects._id}`}">{projects.fileName}</Link></p>
+                          <p>Title: <Link to={`/api/project/${projects._id}`}>{projects.fileName}</Link></p>
                         </div>
                         <div>
-                        <p>by: <Link to="{`/api/projects/${projects._id}`}">{projects.username}</Link></p>
+                          <p>by: <Link to={`/api/project/${projects._id}`}>{projects.username}</Link></p>
                         </div>
                     </div>
                 )

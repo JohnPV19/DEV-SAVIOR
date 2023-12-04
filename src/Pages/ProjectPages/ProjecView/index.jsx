@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate  } from 'react-router-dom';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { okaidia } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 
+
 const API_URL = "http://localhost:5005";
+
 function ProjectView() {
-  const { fileId } = useParams();
+  const navigate = useNavigate();
+  const { _id } = useParams();
   const [projectDetails, setProjectDetails] = useState(null);
   const getLanguageClass = (fileName) => {
     const fileExtension = fileName.split('.').pop().toLowerCase();
@@ -43,13 +46,36 @@ function ProjectView() {
   };
   useEffect(() => {
     axios
-      .get(`${API_URL}/api/projects/${fileId}`)
+      .get(`${API_URL}/api/projects/${_id}`)
       .then((response) => {
         const projectData = response.data;
         setProjectDetails(projectData);
       })
       .catch((error) => console.log(error));
-  }, [fileId]);
+  }, [_id]);
+  
+  const handleDeleteButton =()=>{
+    // Show a confirmation window
+    const isConfirmed = window.confirm("Are you sure you want to delete this post?");
+      // If the user says "Yes":
+    if (isConfirmed){
+      axios
+    .delete(`${API_URL}/api/projects/${_id}`)
+    .then(()=>{
+      console.log("Post deleted!" ); 
+        navigate(`/projects`)
+    })
+    .catch((error)=> console.log("Failed to delete post", error));
+    } 
+      // If the user says "No":
+    else {
+      console.log("Deletion canceled");
+    }
+    
+  };
+
+
+
   return (
     <div>
       <h1>File Viewer</h1>
@@ -77,6 +103,7 @@ function ProjectView() {
             {projectDetails.saveDate}
           </SyntaxHighlighter>
           <p>Author: <a href="/">{projectDetails.username}</a></p>
+          <button onClick={handleDeleteButton}>Delete</button>
         </div>
       )}
     </div>

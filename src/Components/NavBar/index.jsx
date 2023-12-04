@@ -20,7 +20,6 @@ export default function Navbar(){
                     <Link to="/projects"> Projects </Link>
                     <Link to="/login"> Login </Link>
                     <Link to="/signup"> SignUp </Link>
-                    <Link to="/projects"> Projects </Link>
                     <Link to="/profile/:_id"> Profile </Link>
                     <SearchBar onSearch={handleSearch}/>
                 </div>
