@@ -3,26 +3,39 @@ import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/auth.context';
+import '/src/Pages/ProfilePage/index.css';
+
+const API_URL = "http://localhost:5005";
 
 function ProfilePage() {
 
     const navigate = useNavigate();
-    const authContext = useContext(AuthContext); 
-
-    const {username, email} = authContext.user
+    const authContext = useContext(AuthContext);
+    const {_id} = useParams();
+    const [userData, setUserData] = useState([]);
+    useEffect(()=>{
+        axios
+        .get(`${API_URL}/profile/${_id}/user`)
+        .then((response)=> {
+            setUserData(response.data)
+            console.log("TESTE:" , response.data)
+            })
+        .catch((error)=>console.log(error))
+    }, [])
 
   return (
-    <div>
+    <div className="profile-container">
+    <div className="profile-image">
+        <img src="" alt="your_profile_picture" />
+    </div>
+    <div className="profile-details">
         <div>
-            <img src="" alt="your_profile_picture" />
+            <h4>Username:</h4>
+            <p>{userData.username}</p>
         </div>
         <div>
-            <h4>Username:</h4> 
-            <p>{username}</p>
-        </div>
-        <div> 
-            <h4>E-mail:</h4> 
-            <p>{email}</p>
+            <h4>E-mail:</h4>
+            <p>{userData.email}</p>
         </div>
         <div>
             <h4>Projects:</h4>
@@ -30,7 +43,7 @@ function ProfilePage() {
         </div>
         <div>
             <h4>Skills:</h4>
-            <ul> List of tech skills
+            <ul>
                 <li>Javscript</li>
                 <li>React...</li>
             </ul>
@@ -40,6 +53,7 @@ function ProfilePage() {
             <p>user_interests</p>
         </div>
     </div>
+</div>
   )
 }
 

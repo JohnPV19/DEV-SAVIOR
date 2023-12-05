@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useParams, useNavigate  } from 'react-router-dom';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { okaidia } from 'react-syntax-highlighter/dist/esm/styles/prism';
-
+import '/src/Pages/ProjectPages/ProjecView/index.css';
 
 
 const API_URL = "http://localhost:5005";
@@ -77,36 +77,36 @@ function ProjectView() {
 
 
   return (
-    <div>
-      <h1>File Viewer</h1>
-      {projectDetails && (
-        <div>
-          <h3 style={{ color: 'blue' }}>File:</h3>
-          <SyntaxHighlighter language="plaintext" style={okaidia}>
-            {projectDetails.fileName}
-          </SyntaxHighlighter>
-          <h3 style={{ color: 'blue' }}>Code:</h3>
-          <SyntaxHighlighter
-            language={getLanguageClass(projectDetails.fileName)}
-            style={okaidia}
-            PreTag="div"
-            CodeTag="div"
-            customStyle={{
-              backgroundColor: 'black', // Background color of the code block
-              padding: '10px',
-            }}
-          >
-            {projectDetails.content}
-          </SyntaxHighlighter>
-          <h3 style={{ color: 'green' }}>Date uploaded:</h3>
-          <SyntaxHighlighter language="plaintext" style={okaidia}>
-            {projectDetails.saveDate}
-          </SyntaxHighlighter>
-          <p>Author: <a href="/">{projectDetails.username}</a></p>
-          <button onClick={handleDeleteButton}>Delete</button>
-        </div>
-      )}
+    <div id="fileViewerContainer">
+  <h1>File Viewer</h1>
+  {projectDetails && (
+    <div id="fileDetails">
+      <h3 style={{ color: 'blue' }}>File:</h3>
+      <SyntaxHighlighter language="plaintext" style={okaidia}>
+        {projectDetails.fileName}
+      </SyntaxHighlighter>
+      <h3 style={{ color: 'blue' }}>Code:</h3>
+      <SyntaxHighlighter
+        language={getLanguageClass(projectDetails.fileName)}
+        style={okaidia}
+        PreTag="div"
+        CodeTag="div"
+        customStyle={{
+          backgroundColor: 'black', // Background color of the code block
+          padding: '10px',
+        }}
+      >
+        {projectDetails.content}
+      </SyntaxHighlighter>
+      <h3 style={{ color: 'green' }}>Date uploaded:</h3>
+      <SyntaxHighlighter language="plaintext" style={okaidia}>
+        {projectDetails.saveDate}
+      </SyntaxHighlighter>
+      <p>Author: <a href="/">{projectDetails.username}</a></p>
+      <button onClick={handleDeleteButton}>Delete</button>
     </div>
+  )}
+</div>
   );
 }
 export default ProjectView;

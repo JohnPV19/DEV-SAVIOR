@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react'; 
 import { AuthContext } from '../../Context/auth.context';
 import axios from 'axios';
-
+import '/src/Pages/Login/index.css';
 import { useNavigate } from 'react-router-dom';
 
 const API_URL = "http://localhost:5005";
@@ -33,8 +33,8 @@ function LoginPage(){
     }
 
     return( 
-        <div>
-            <h3>Login Page</h3>
+        <div id='login-box'>
+            <h1>Login Page</h1>
             <form onSubmit = {handleLoginSubmit}>
                 <div>
                     <label>Email:</label>

@@ -1,0 +1,80 @@
+#newPostTitle {
+    margin: 20px auto 10px;
+    padding: 0;
+    color: #000;
+    text-align: center;
+    position: relative;
+    z-index: 2; /* Set a higher z-index to bring it above the box */
+}
+
+#postFormContainer {
+    position: relative; /* Change position to relative */
+    width: 400px;
+    margin: 50px auto; /* Adjust margin for positioning */
+    padding: 40px;
+    background: #000;
+    box-sizing: border-box;
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
+    border-radius: 10px;
+    color: #fff;
+    text-align: center;
+    z-index: 1; /* Lower z-index for the box */
+}
+
+#postFormContainer label {
+    display: block;
+    margin-bottom: 5px;
+    color: #fff;
+}
+
+#postFormContainer input[type="text"],
+#postFormContainer input[type="img"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    font-size: 16px;
+    outline: none;
+}
+
+#postFormContainer button[type="submit"] {
+    width: 50%;
+    padding: 8px;
+    border: 2px solid transparent;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    font-weight: bold; /* Stronger white text */
+    cursor: pointer;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+    animation: neonBorder 2s infinite;
+}
+
+#postFormContainer button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+#postFormContainer p {
+    color: #ff0000;
+    margin-top: 10px;
+}
+
+@keyframes neonBorder {
+    0% {
+        box-shadow: 0 0 5px 2px rgba(0, 123, 255, 0.5), 0 0 10px 5px rgba(0, 123, 255, 0.5), inset 0 0 5px rgba(0, 123, 255, 0.5);
+        border: 2px solid rgba(0, 123, 255, 0.5);
+    }
+    50% {
+        box-shadow: 0 0 10px 5px rgba(0, 123, 255, 0.7), 0 0 15px 7px rgba(0, 123, 255, 0.7), inset 0 0 7px rgba(0, 123, 255, 0.7);
+        border: 2px solid rgba(0, 123, 255, 0.7);
+    }
+    100% {
+        box-shadow: 0 0 5px 2px rgba(0, 123, 255, 0.5), 0 0 10px 5px rgba(0, 123, 255, 0.5), inset 0 0 5px rgba(0, 123, 255, 0.5);
+        border: 2px solid rgba(0, 123, 255, 0.5);
+    }
+}

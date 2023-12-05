@@ -1,28 +1,23 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
-
-
+import authService from "../services/auth.service";
 const API_URL = "http://localhost:5005";
-
 export const AuthContext = React.createContext();
-
 export function AuthProviderWrapper(props) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [user, setUser] = useState(null);
-
   /* Store the token in the local storage */
   const storeToken = (token) => {
     localStorage.setItem('authToken', token);
   };
-
   /* Authenticate the User via JWT */
   const authenticateUser = () => {
     // Get the stored token from the local storage
     const storedToken = localStorage.getItem('authToken');
-
     if (storedToken) {
-      axios.get(`${API_URL}/auth/verify`, { headers: { Authorization: `Bearer ${storedToken}` } })
+      authService
+        .verify()
         .then((response) => {
           const userData = response.data;
           setIsLoggedIn(true);
@@ -42,21 +37,17 @@ export function AuthProviderWrapper(props) {
       console.log("Failed to log")
     }
   };
-
   const removeToken = () => {
     localStorage.removeItem('authToken');
   };
-
   const logOut = () => {
     removeToken();
     setIsLoggedIn(false);
     setUser(null);
   };
-
   useEffect(() => {
     authenticateUser();
   }, []);
-
   return (
     <AuthContext.Provider value={{
       isLoggedIn,

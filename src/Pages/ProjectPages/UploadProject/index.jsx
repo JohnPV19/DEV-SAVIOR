@@ -5,6 +5,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import Dropzone from 'react-dropzone';
 import { v4 as uuidv4 } from 'uuid';
 import { AuthContext } from '../../../Context/auth.context';
+import '/src/Pages/ProjectPages/UploadProject/index.css';
 
 const API_URL = "http://localhost:5005";
 
@@ -39,23 +40,23 @@ function NewProject() {
 };
 
 
-  return (
-    <div>
-        <h1>New Project</h1>
-        <div>
-        <Dropzone onDrop={handleFileUpload}>
+return (
+  <div>
+    <h1 id="newProjectTitle">New Project</h1>
+    <div id="dropzoneContainer">
+      <Dropzone onDrop={handleFileUpload}>
         {({ getRootProps, getInputProps }) => (
           <section>
-            <div {...getRootProps()}>
+            <div id="dropzone" {...getRootProps()}>
               <input {...getInputProps()} />
               <p>Drag 'n' Drop some files here</p>
             </div>
           </section>
         )}
       </Dropzone>
-        </div>
     </div>
-  )
+  </div>
+)
 }
 
 export default NewProject

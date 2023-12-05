@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useState } from 'react';
-
+import '/src/Pages/SignUp/index.css';
 import { useNavigate } from 'react-router-dom';
 
 const API_URL = "http://localhost:5005";
@@ -33,30 +33,28 @@ function SignUpPage(){
 
 
 
-    return(
-        <div>
-            <h1>SignUp Page</h1>
-            <form onSubmit = {handleLoginSubmit}>
-                <div>
-                    <label>Email:</label>
-                    <input type="email" name="email" onChange={(e)=> setEmail(e.target.value)} />
-                </div>
-                <div>
-                    <label>Password:</label>
-                    <input type="password" name="password" onChange={(e)=> setPassword(e.target.value)} />
-                </div>
-                <div>
-                     <label>Usename:</label>
-                     <input type="text" name="username" onChange={(e)=> setName(e.target.value)} />
-                </div>
-                <div>
-                    <button type ="submit">Sign Up</button>
-                </div>
-                {error && <p>{error}</p>}
-            </form>
+    return (
+        <div id="signup-box">
+          <h1>SignUp Page</h1>
+          <form onSubmit={handleLoginSubmit}>
+            <div id="email-field">
+              <label>Email:</label>
+              <input type="email" name="email" onChange={(e) => setEmail(e.target.value)} />
+            </div>
+            <div id="password-field">
+              <label>Password:</label>
+              <input type="password" name="password" onChange={(e) => setPassword(e.target.value)} />
+            </div>
+            <div id="username-field">
+              <label>Username:</label>
+              <input type="text" name="username" onChange={(e) => setName(e.target.value)} />
+            </div>
+            <div id="submit-button">
+              <button type="submit">Sign Up</button>
+            </div>
+            {error && <p>{error}</p>}
+          </form>
         </div>
-    )
-}
-
-
+      );
+    }
 export default SignUpPage

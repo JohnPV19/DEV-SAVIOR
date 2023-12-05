@@ -1,0 +1,146 @@
+body {
+    background-color: #111; /* Adjusted the background color to a darker shade of black */
+    color: #fff; /* Text color */
+  }
+  
+  #viewPostContainer {
+    text-align: center;
+    color: #fff;
+  }
+  
+  #postDetails {
+    margin-bottom: 20px;
+  }
+  
+  #errorMessage p {
+    color: #fff;
+    font-size: 18px;
+  }
+  
+  #postContent p {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  
+  #postContent button {
+    margin-top: 10px;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  #postContent button:hover {
+    background-color: #0056b3;
+  }
+  
+  #repliesContainer {
+    margin-bottom: 20px;
+  }
+  
+  #noComments p {
+    font-size: 16px;
+  }
+  
+  .commentItem {
+    margin-bottom: 15px;
+  }
+  
+  .commentItem p {
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+  
+  .commentItem p a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  #replyForm {
+    margin-bottom: 20px;
+  }
+  
+  #replyForm form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  #replyForm label {
+    margin-bottom: 10px;
+  }
+  
+  #replyForm input[type="text"],
+  #replyForm input[type="img"] {
+    width: 100%;
+    padding: 8px;
+    border: none;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    font-size: 16px;
+    margin-bottom: 10px;
+    outline: none;
+  }
+  
+  #replyForm button[type="submit"] {
+    width: 50%;
+    padding: 8px;
+    border: 2px solid transparent;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  #replyForm button[type="submit"]:hover {
+    background-color: #0056b3;
+  }
+
+  /* Body styles */
+body {
+    background-color: #111; /* Dark background */
+    color: #fff; /* Text color */
+  }
+  
+  /* Styles for the container wrapping the post details */
+  #postDetails {
+    border-radius: 10px;
+    animation: neonBorder 2s infinite;
+    padding: 20px 30px; /* Adjust padding for space inside the box */
+    margin: 20px 0;
+    overflow: hidden;
+    word-wrap: break-word;
+  }
+  
+  /* Keyframes for the neon effect */
+  @keyframes neonBorder {
+    0% {
+      box-shadow: 0 0 5px 2px rgba(0, 123, 255, 0.5), 0 0 10px 5px rgba(0, 123, 255, 0.5), inset 0 0 5px rgba(0, 123, 255, 0.5);
+      border: 2px solid rgba(0, 123, 255, 0.5);
+    }
+    50% {
+      box-shadow: 0 0 10px 5px rgba(0, 123, 255, 0.7), 0 0 15px 7px rgba(0, 123, 255, 0.7), inset 0 0 7px rgba(0, 123, 255, 0.7);
+      border: 2px solid rgba(0, 123, 255, 0.7);
+    }
+    100% {
+      box-shadow: 0 0 5px 2px rgba(0, 123, 255, 0.5), 0 0 10px 5px rgba(0, 123, 255, 0.5), inset 0 0 5px rgba(0, 123, 255, 0.5);
+      border: 2px solid rgba(0, 123, 255, 0.5);
+    }
+  }
+  
+  /* Styles for comment items */
+  .commentItem {
+    border-radius: 10px;
+    animation: neonBorder 2s infinite;
+    padding: 10px 20px; /* Adjust padding for space inside the box */
+    margin: 10px 0;
+    overflow: hidden;
+    word-wrap: break-word;
+  }
+  

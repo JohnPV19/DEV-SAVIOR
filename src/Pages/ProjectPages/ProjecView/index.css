@@ -1,0 +1,64 @@
+#fileViewerContainer {
+  background-color: #1e1e1e; /* Visual Studio Code background color */
+  color: #d4d4d4; /* Visual Studio Code text color */
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+#fileDetails {
+  margin-top: 20px;
+}
+
+#fileDetails h3 {
+  font-size: 16px; /* Heading font size */
+  margin-bottom: 8px; /* Bottom margin for headings */
+}
+
+#fileDetails h3.blueColor {
+  color: #569cd6; /* Visual Studio Code blue color */
+}
+
+#fileDetails h3.greenColor {
+  color: #b5cea8; /* Visual Studio Code green color */
+}
+
+/* Styling for SyntaxHighlighter code blocks */
+.codeHighlighter {
+  background-color: #2d2d2d; /* Visual Studio Code code block background color */
+  padding: 10px;
+  margin-top: 10px; /* Adjust the top margin as needed */
+  border-radius: 5px;
+  border: 1px solid #3d3d3d; /* Visual Studio Code code block border color */
+}
+
+.codeHighlighter > div {
+  padding: 0 !important; /* Reset inner div padding */
+  margin: 0 !important; /* Reset inner div margin */
+}
+
+#fileDetails a {
+  color: #9cdcfe; /* Visual Studio Code link color */
+  text-decoration: none; /* Remove default link underline */
+}
+
+#fileDetails button {
+  padding: 8px 16px; /* Button padding */
+  background-color: #569cd6; /* Visual Studio Code button background color */
+  color: #fff; /* Button text color */
+  border: none; /* Remove button border */
+  border-radius: 5px; /* Button border radius */
+  cursor: pointer; /* Cursor style */
+  margin-top: 10px; /* Margin from the top */
+}
+
+.fileNameCenter {
+  text-align: center;
+}
+
+/* Apply this class to the SyntaxHighlighter element for the file name */
+.fileNameCenter span {
+  display: inline-block;
+  width: 100%; /* Set width to take the full space */
+  text-align: left; /* Reset text alignment for the text inside */
+}

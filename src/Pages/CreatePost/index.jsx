@@ -3,7 +3,7 @@ import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/auth.context';
-
+import '/src/Pages/CreatePost/index.css';
 const API_URL = "http://localhost:5005";
 function NewPost() {
   const navigate = useNavigate();
@@ -34,22 +34,22 @@ function NewPost() {
   };
   return (
     <div>
-        <h1>New Post</h1>
-        <div>
-          <form onSubmit={handleCreatedPost}>
-            <div>
-              <label>Title: <input type="text" value={postTitle} onChange={(e)=>setPostTitle(e.target.value)} required/> </label>
-            </div>
-            <div>
-              <label>Content: <input type="text" value={postBodyText} onChange={(e)=>setPostBodyText(e.target.value)} required/> </label>
-            </div>
-            <div>
-              <label>Image: <input type="img" value={postImg} onChange={(e)=>setPostImg(e.target.value)}/> </label>
-            </div>
-            <button type="submit">Submit</button>
-          </form>
-        </div>
+      <h1 id="newPostTitle">New Post</h1>
+      <div id="postFormContainer">
+        <form onSubmit={handleCreatedPost}>
+          <div id="postTitleField">
+            <label>Title: <input type="text" value={postTitle} onChange={(e) => setPostTitle(e.target.value)} required /> </label>
+          </div>
+          <div id="postContentField">
+            <label>Content: <input type="text" value={postBodyText} onChange={(e) => setPostBodyText(e.target.value)} required /> </label>
+          </div>
+          <div id="postImageField">
+            <label>Image: <input type="img" value={postImg} onChange={(e) => setPostImg(e.target.value)} /> </label>
+          </div>
+          <button type="submit">Submit</button>
+        </form>
+      </div>
     </div>
-  )
+  );
 }
 export default NewPost
