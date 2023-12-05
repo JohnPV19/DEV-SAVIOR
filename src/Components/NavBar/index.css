@@ -1,19 +1,28 @@
-#inner-nav{
-    background-color: rgb(20, 14, 35);
-    display: flex;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: calc(100%);
-    height:55px;
-    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.99);
-  }
-  #nav-links{
-    padding-left: 1%;
-    display: flex;
-    color: greenyellow;
-    align-items: center;
-    align-content: s;
-    padding-top: 3px;
-    
-  }
+#inner-nav {
+  background-color: rgb(20, 14, 35);
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%; /* changed from calc(100%) to 100% */
+  height: 55px;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.99);
+}
+
+#nav-links {
+  padding-left: 1%;
+  display: flex;
+  color: greenyellow;
+  align-items: center;
+  padding-top: 3px;
+}
+
+#nav-links a {
+  text-decoration: none;
+  color: greenyellow;
+  margin-right: 15px;
+}
+
+#nav-links a:hover {
+  color: white;
+}

@@ -2,13 +2,12 @@ import React, { useContext } from 'react'
 import axios from 'axios'
 import { useEffect, useState, navigate } from 'react'
 import { Link, useNavigate, useParams } from "react-router-dom"
-import { AuthContext } from '../../Context/auth.context'
+import { AuthContext } from '../../Context/auth.context';
 const API_URL = "http://localhost:5005";
 function ViewPost() {
   const navigate = useNavigate();
   const authContext = useContext(AuthContext);
   const {_id} = useParams();
-    // Selected Post properties
   const [clickedPost, setClickedPost] = useState([]);
   const [clickedPostTitle, setClickedPostTitle] = useState("");
   const [clickedPostText, setClickedPostText] = useState("");
@@ -18,7 +17,6 @@ function ViewPost() {
     // Post Replies
   const [replyText, setReplyText] = useState("");
   const [replyImg, setReplyImg] = useState("");
-  const [lastPost, setLastPost] = useState([]);
     // Fetches and saves clicked Post properties from the Homepage
   useEffect(()=>{
     axios
@@ -41,7 +39,7 @@ function ViewPost() {
   };
     // Deletes post
   const handleDeleteButton =()=>{
-    // Show a confirmation window
+    // Shows a confirmation window
     const isConfirmed = window.confirm("Are you sure you want to delete this post?");
       // If the user says "Yes":
     if (isConfirmed){
@@ -51,14 +49,12 @@ function ViewPost() {
       console.log("Post deleted!" );
         navigate(`/`)
     })
-    .catch((error)=> console.log("Failed to delete post", error));
-    }
+    .catch((error)=> console.log("Failed to delete post", error));}
       // If the user says "No":
     else {
-      console.log("Deletion canceled");
-    }
-  };
-      // Submits and saves new Post Reply
+      console.log("Deletion canceled");}
+    };
+    // Submits and saves new Post Reply
   const handleReplySubmit = (e) =>{
     e.preventDefault()
     const username = authContext.user.username
@@ -69,16 +65,18 @@ function ViewPost() {
       img: replyImg,
       username: username,
     }
+    console.log("NewComment:", newComment)
       // Create the new reply and save it
-      axios
-      .post(`${API_URL}/api/comment/new`, newComment)
+    axios
+      .post(`${API_URL}/api/posts/${_id}/comment/new`, newComment)
       .then((response)=> {
+        console.log("response:", response)
         const postData = response.data
         console.log("latest post:", postData)
-        setLastPost(postData)
         const postsData = [...clickedPostComments]
         console.log("Posts copy:", postsData)
-        setClickedPostComments([...postsData, lastPost])
+        setClickedPostComments([...clickedPostComments, postData])
+        console.log("[...clickedPostComments, postData]", clickedPostComments)
         console.log(`Comment by "${username}" successefully created`) // DEBUGGER
         console.log("All comments:", clickedPostComments)
         //navigate(`/`)
@@ -118,7 +116,7 @@ function ViewPost() {
                   <div key={index}>
                     <p>{post.content}</p>
                     <p>{post.img}</p>
-                    <p>replied by "{post.username}"</p>
+                    <p>replied by "<a href="">{post.username}</a>"</p>
                   </div>
                 )
               })}

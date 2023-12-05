@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios'; // Import Axios for making API requests
-
+import '/src/Components/SearchBar/index.css'
 const API_URL = "http://localhost:5005";
 
 
@@ -44,59 +44,39 @@ useEffect(() => {
 }, [searchTerm]);
 
 
-  return (
-    <div>
-      <label htmlFor="searchInput">Search:</label>
-      <input
-        type="text"
-        id="searchInput"
-        value={searchTerm}
-        onChange={handleSearch}
-        placeholder="Type your search here"
-      />
+return (
+  <div id="searchContainer">
+  <label htmlFor="searchInput">Search:</label>
+  <input
+    type="text"
+    id="searchInput"
+    value={searchTerm}
+    onChange={handleSearch}
+    placeholder="Type your search here"
+  />
 
-      <button onClick={handleSaveSearch}>
-        <span style={{ textDecoration: 'none', color: 'white' }}> 
-        <Link to={`/searchResult/${searchTerm}`}>
-          Submit
-        </Link>
-        </span>
-      </button>
-
-      {/* Display suggestions */}
-      {suggestions.length > 0 && (
-        <ul> 
-          <h2>Titles</h2>
-        {suggestions.map((suggestion, index) => (
-          <li key={index}>
-            <Link to={`/result/${suggestion._id}`}>
-              <div>
-               
-                <h3>{suggestion.title}</h3>
-              </div>
-            </Link>
-            
-          </li>
-          
-        )
-        )}
-        <h2>Content</h2>
-        {suggestions.map((suggestion, index) => (
-          <li key={index}>
-            <Link to={`/result/${suggestion._id}`}>
-              <div>
-                <p>{suggestion.bodyText}</p>
-              </div>
-            </Link>
-            
-          </li>
-          
-        )
-        )}
-      </ul>
-      )}
+  {suggestions.length > 0 && (
+    <div id="suggestionsContainer">
+      {suggestions.map((suggestion, index) => (
+        <div className="suggestion" key={index}>
+          <Link to={`/api/posts/${suggestion._id}`}>
+            <div>
+              <h3>{suggestion.title}</h3>
+              <p>{suggestion.bodyText}</p>
+            </div>
+          </Link>
+        </div>
+      ))}
     </div>
-  );
+  )}
+
+  <button onClick={handleSaveSearch} id="submitButton">
+    <span style={{ textDecoration: 'none', color: 'white' }}>
+      <Link to={`/searchResult/${searchTerm}`}>Submit</Link>
+    </span>
+  </button>
+</div>
+);
 }
 
 export default SearchBar;
