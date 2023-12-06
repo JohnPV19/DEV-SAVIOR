@@ -1,4 +1,4 @@
-import '/src/Components/Navbar/index.css'
+import './index.css'
 import { Link, useParams } from "react-router-dom";
 import { AuthContext } from '../../Context/auth.context';
 import React, {useContext} from 'react';

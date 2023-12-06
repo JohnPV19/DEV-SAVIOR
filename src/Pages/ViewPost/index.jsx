@@ -3,7 +3,7 @@ import axios from 'axios'
 import { useEffect, useState, navigate } from 'react'
 import { Link, useNavigate, useParams } from "react-router-dom"
 import { AuthContext } from '../../Context/auth.context';
-import '/src/Pages/ViewPost/index.css';
+import './index.css';
 const API_URL = "http://localhost:5005";
 function ViewPost() {
   const navigate = useNavigate();

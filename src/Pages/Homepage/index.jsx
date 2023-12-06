@@ -2,7 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import { useEffect, useState, navigate } from 'react'
 import { Link, useParams } from "react-router-dom"
-import '/src/Pages/Homepage/index.css';
+import './index.css';
 
 const API_URL = "http://localhost:5005";
 

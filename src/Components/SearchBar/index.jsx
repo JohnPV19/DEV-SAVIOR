@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios'; // Import Axios for making API requests
-import '/src/Components/SearchBar/index.css'
+import './index.css'
 const API_URL = "http://localhost:5005";
 
 

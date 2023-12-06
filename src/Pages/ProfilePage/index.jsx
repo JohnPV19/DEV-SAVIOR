@@ -3,7 +3,7 @@ import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/auth.context';
-import '/src/Pages/ProfilePage/index.css';
+import './index.css';
 
 const API_URL = "http://localhost:5005";
 
