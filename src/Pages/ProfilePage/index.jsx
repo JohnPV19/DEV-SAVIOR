@@ -5,7 +5,7 @@ import { Link, useParams, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/auth.context';
 import './index.css';
 
-const API_URL = "http://localhost:5005";
+const API_URL = "https://devhub.adaptable.app";
 
 function ProfilePage() {
 

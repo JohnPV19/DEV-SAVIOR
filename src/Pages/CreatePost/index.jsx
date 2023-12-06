@@ -3,8 +3,8 @@ import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/auth.context';
-import '/src/Pages/CreatePost/index.css';
-const API_URL = "http://localhost:5005";
+import './index.css';
+const API_URL = "https://devhub.adaptable.app";
 function NewPost() {
   const navigate = useNavigate();
   const authContext = useContext(AuthContext);

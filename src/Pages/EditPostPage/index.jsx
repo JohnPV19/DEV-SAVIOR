@@ -4,7 +4,7 @@ import { useEffect, useState, navigate } from 'react'
 import { Link, useNavigate, useParams } from "react-router-dom"
 
 
-const API_URL = "http://localhost:5005";
+const API_URL = "https://devhub.adaptable.app";
 
 
 function EditPost() {

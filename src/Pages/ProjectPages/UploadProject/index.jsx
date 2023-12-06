@@ -5,9 +5,9 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import Dropzone from 'react-dropzone';
 import { v4 as uuidv4 } from 'uuid';
 import { AuthContext } from '../../../Context/auth.context';
-import '/src/Pages/ProjectPages/UploadProject/index.css';
+import './index.css';
 
-const API_URL = "http://localhost:5005";
+const API_URL = "https://devhub.adaptable.app";
 
 
 function NewProject() {

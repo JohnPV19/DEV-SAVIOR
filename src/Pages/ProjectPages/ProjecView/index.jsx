@@ -3,10 +3,10 @@ import axios from 'axios';
 import { useParams, useNavigate  } from 'react-router-dom';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { okaidia } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import '/src/Pages/ProjectPages/ProjecView/index.css';
+import './index.css';
 
 
-const API_URL = "http://localhost:5005";
+const API_URL = "https://devhub.adaptable.app";
 
 function ProjectView() {
   const navigate = useNavigate();

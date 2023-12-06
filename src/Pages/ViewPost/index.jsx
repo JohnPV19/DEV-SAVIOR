@@ -4,7 +4,7 @@ import { useEffect, useState, navigate } from 'react'
 import { Link, useNavigate, useParams } from "react-router-dom"
 import { AuthContext } from '../../Context/auth.context';
 import './index.css';
-const API_URL = "http://localhost:5005";
+const API_URL = "https://devhub.adaptable.app";
 function ViewPost() {
   const navigate = useNavigate();
   const authContext = useContext(AuthContext);

@@ -1,11 +1,11 @@
 import { useContext, useState } from 'react'; 
 import { AuthContext } from '../../Context/auth.context';
 import axios from 'axios';
-import '/src/Pages/Login/index.css';
+import './index.css';
 import { useNavigate } from 'react-router-dom';
 import { Link, useParams } from "react-router-dom";
 
-const API_URL = "http://localhost:5005";
+const API_URL = "https://devhub.adaptable.app";
 
 function LoginPage(){
     const [email, setEmail] = useState("")
