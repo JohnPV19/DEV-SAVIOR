@@ -11,7 +11,7 @@ import NewProject from './Pages/ProjectPages/UploadProject'
 import ProjectView from './Pages/ProjectPages/ProjecView'
 import Projects from './Pages/ProjectPages/AllProjects'
 import ProfilePage from './Pages/ProfilePage'
-
+import ProfileEdit from './Pages/ProfileEdit'
 function App() {
 
   return ( 
@@ -26,6 +26,7 @@ function App() {
            <Route path="/projects" element={<Projects/>}/>
            <Route path="/api/projects/upload" element= {<NewProject/>}/>
            <Route path="/profile/:_id" element={<ProfilePage/>}/>
+           <Route path="/profile/:_id/edit" element= {<ProfileEdit/>}/>
            <Route path="/api/posts/:_id" element= {<ViewPost/>}/> 
            <Route path="/api/posts/edit/:_id" element= {<EditPost/>}/> 
            <Route path="/api/project/:_id" element= {<ProjectView/>}/> 

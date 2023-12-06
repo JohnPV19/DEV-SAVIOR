@@ -3,11 +3,8 @@ import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/auth.context';
-import './index.css';
-
-const API_URL = "https://devhub.adaptable.app";
-
-function ProfilePage() {
+const API_URL = "http://localhost:5005";
+function ProfileEdit() {
     const navigate = useNavigate();
     const authContext = useContext(AuthContext);
     const {_id} = useParams();
@@ -32,42 +29,57 @@ function ProfilePage() {
         </div>
         <div>
             <h4>Username:</h4>
-            <p>{userData.username}</p>
+            <form>
+            <input type="img" value={userData.firstName} onChange={(e)=>setReplyImg(e.target.value)} placeholder={`${userData.username}`}  />
+            </form>
         </div>
         <div>
             <h4>E-mail:</h4>
-            <p>{userData.email}</p>
+            <form>
+            <input type="img" value={userData.email} onChange={(e)=>setReplyImg(e.target.value)} placeholder={`${userData.email}`}  />
+            </form>
         </div>
         <div>
-            <h4>Name:</h4>
-            {!userData.firstName &&
-            <p>Who are you?</p>}
-            {userData.lastName &&
-            <p>{userData.firstName} {userData.lastName}</p>
-            }
+            <h4>First Name:</h4>
+            <form>
+            <input type="img" value={userData.firstName} onChange={(e)=>setReplyImg(e.target.value)} placeholder={userData.firstName ? userData.firstName : "First Name"}  />
+            </form>
+        </div>
+        <div>
+            <h4>Last Name:</h4>
+            <form>
+            <input type="img" value={userData.lastName} onChange={(e)=>setReplyImg(e.target.value)} placeholder={userData.lastName ? userData.lastName : "Last Name"}  />
+            </form>
         </div>
         <div>
             <h4>Projects:</h4>
             {!userData.createdProjects &&
-            <p>Add your first project...</p>}
-            {userData.createdProjects&&
+            <p>Show us your work</p>}
+            {userData.createdProjects &&
             userData.createdProjects.map((project, index)=>{
                 return(
                     <div key={index}>
-                    <Link to={`/api/project/${project._id}`}><p>{project.fileName}</p></Link>
+                    <input type="text" value={project.fileName} onChange={(e)=>setReplyImg(e.target.value)} placeholder={`${project.fileName}`}  />
                     </div>
                 )
             })}
         </div>
         <div>
             <h4>Skills:</h4>
+            {userData.skills == [] &&
+            <p>Add some skills</p>}
             {userData.skills &&
-            <p>Show us your skills</p>}
-            {!userData.skills === "" &&
-            userData.skills.map((skill, index)=>{
+            userData.skills.map((skills, index)=>{
                 return(
                     <div key={index}>
-                    <p>{skill}</p>
+                    <input type="text" value={skills.skills} onChange={(e)=>setReplyImg(e.target.value)} placeholder={`${skills.skills}`}  />
+                    </div>
+                )
+            })}
+            {userData.skills.map((skill, index)=>{
+                return(
+                    <div key={index}>
+                    <input type="text" value={skill.skill} onChange={(e)=>setReplyImg(e.target.value)} placeholder={userData.skill ? userData.skill : "Add some skills"}  />
                     </div>
                 )
             })}
@@ -100,9 +112,9 @@ function ProfilePage() {
             })}
         </div>
         <div>
-            <a href={`/profile/${_id}/edit`}><button>Edit Profile</button></a>
+            <button to="/">Edit Profile</button>
         </div>
     </div>
   )
 }
-export default ProfilePage
+export default ProfileEdit
