@@ -39,7 +39,7 @@ function ViewPost() {
     // useEffect to trigger the fetching of the post data based on _id
     useEffect(() => {
       updateComments();
-    }, [_id]);
+    }, [_id,clickedPostComments.length]);
    
 
     // Navigates to Edit Post page

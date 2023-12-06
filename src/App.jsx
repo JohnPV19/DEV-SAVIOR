@@ -1,8 +1,7 @@
 import './App.css'
 import { Route, Routes } from 'react-router-dom'
 import HomePage from './Pages/Homepage'
-
-import Navbar from './Components/NavBar'
+import Navbar from './Components/NavBar/index'
 import SignUpPage from './Pages/SignUp'
 import LoginPage from './Pages/Login';
 import NewPost from './Pages/CreatePost'
