@@ -2,7 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import { useEffect, useState, navigate } from 'react'
 import { Link, useParams } from "react-router-dom"
-
+import '/src/Pages/Homepage/index.css';
 
 const API_URL = "http://localhost:5005";
 
@@ -25,23 +25,26 @@ function HomePage() {
 
 
   return (
-    <div>
-        <h1>HOMEPAGE</h1>
-        <h2>All Posts</h2>
-        <div> <div></div>
+    <div id="homepage">
+      <h1>HOMEPAGE</h1>
+      <h2>All Posts</h2>
+      <div id="postsContainer">
+        <div id="postsList">
           {postsList &&
-            <div>
-              {postsList.map((post, index)=>{
-                return(
-                    <div key={index}>
-                      <Link to={`/api/posts/${post._id}`}>{post.title}</Link>
-                    </div>
-                )
-              })}
-            </div>}
+            postsList.map((post, index) => (
+              <div className="postBox" key={index}>
+                <div className="postTitle">
+                  <Link to={`/api/posts/${post._id}`}>{post.title}</Link>
+                </div>
+                <div className="postText">
+                  <Link to={`/api/posts/${post._id}`}>{post.bodyText}</Link>
+                </div>
+              </div>
+            ))}
         </div>
+      </div>
     </div>
-  )
+  );
 }
 
 export default HomePage

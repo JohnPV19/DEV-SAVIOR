@@ -1,0 +1,41 @@
+#homepage {
+    text-align: center;
+    color: #fff;
+  }
+  
+  #homepage h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+  }
+  
+  #homepage h2 {
+    font-size: 24px;
+    margin-bottom: 15px;
+  }
+  
+  #postsContainer {
+    display: flex;
+    justify-content: center;
+  }
+  
+  #postsList {
+    max-width: 800px;
+    width: 100%;
+  }
+  
+  .postBox {
+    margin-bottom: 20px;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: #333;
+  }
+  
+  .postTitle {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .postText {
+    font-size: 16px;
+    color: #ccc;
+  }

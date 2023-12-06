@@ -20,21 +20,28 @@ function ViewPost() {
   const [replyText, setReplyText] = useState("");
   const [replyImg, setReplyImg] = useState("");
     // Fetches and saves clicked Post properties from the Homepage
-  useEffect(()=>{
-    axios
-    .get(`${API_URL}/api/posts/${_id}`)
-    .then((response)=>{
-      const postData = response.data;
-      setClickedPost(postData);
-      setClickedPostTitle(postData.title);
-      setClickedPostText(postData.bodyText);
-      setClickedPostImg(postData.img);
-      setClickedPostUser(postData.username);
-      setClickedPostComments(postData.comments);
-      console.log(`Viewing post of "${postData.username}"`) // DEBUGGER
-    })
-    .catch(()=>console.log({error: "Failed to fetch specified post"}))
-  }, [])
+    const updateComments = () => {
+      axios
+        .get(`${API_URL}/api/posts/${_id}`)
+        .then((response) => {
+          const postData = response.data;
+          setClickedPost(postData);
+          setClickedPostTitle(postData.title);
+          setClickedPostText(postData.bodyText);
+          setClickedPostImg(postData.img);
+          setClickedPostUser(postData.username);
+          setClickedPostComments(postData.comments);
+          console.log(`Viewing post of "${postData.username}"`); // DEBUGGER
+        })
+        .catch(() => console.log({ error: "Failed to fetch specified post" }));
+    };
+    
+    // useEffect to trigger the fetching of the post data based on _id
+    useEffect(() => {
+      updateComments();
+    }, [_id]);
+   
+
     // Navigates to Edit Post page
   const handleEditNavigate =()=>{
     navigate(`/api/posts/edit/${_id}`);
@@ -57,6 +64,7 @@ function ViewPost() {
       console.log("Deletion canceled");}
     };
     // Submits and saves new Post Reply
+    
   const handleReplySubmit = (e) =>{
     e.preventDefault()
     const username = authContext.user.username
@@ -69,22 +77,22 @@ function ViewPost() {
     }
     console.log("NewComment:", newComment)
       // Create the new reply and save it
-    axios
-      .post(`${API_URL}/api/posts/${_id}/comment/new`, newComment)
-      .then((response)=> {
-        console.log("response:", response)
-        const postData = response.data
-        console.log("latest post:", postData)
-        const postsData = [...clickedPostComments]
-        console.log("Posts copy:", postsData)
-        setClickedPostComments([...clickedPostComments, postData])
-        console.log("[...clickedPostComments, postData]", clickedPostComments)
-        console.log(`Comment by "${username}" successefully created`) // DEBUGGER
-        console.log("All comments:", clickedPostComments)
-        //navigate(`/`)
-      })
-      .catch((error) => {console.log({error: "Failed to create post"})})
-  };
+      axios
+    .post(`${API_URL}/api/posts/${_id}/comment/new`, newComment)
+    .then((response) => {
+      console.log("Response:", response);
+      const postData = response.data;
+      console.log("New comment:", postData);
+
+      // Update the state with the new comment
+      setClickedPostComments((prevComments) => [...prevComments, postData]);
+      console.log(`Comment by "${username}" successfully created`);
+    })
+    .catch((error) => {
+      console.log({ error: "Failed to create post" });
+    });
+};
+
   const handleLoggedOutClick = (e) =>{
         navigate(`/login`)
   }

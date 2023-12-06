@@ -3,6 +3,7 @@ import { AuthContext } from '../../Context/auth.context';
 import axios from 'axios';
 import '/src/Pages/Login/index.css';
 import { useNavigate } from 'react-router-dom';
+import { Link, useParams } from "react-router-dom";
 
 const API_URL = "http://localhost:5005";
 
@@ -43,6 +44,9 @@ function LoginPage(){
                 <div>
                     <label>Password:</label>
                     <input type="password" name="password" onChange={(e)=> setPassword(e.target.value)} />
+                </div>
+                <div>
+                    <p><Link to="/signup"> Don't have an account?  </Link></p>
                 </div>
                 <div>
                     <button type ="submit">Sign Up</button>

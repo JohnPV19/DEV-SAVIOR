@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useState } from 'react';
 import '/src/Pages/SignUp/index.css';
 import { useNavigate } from 'react-router-dom';
+import { Link, useParams } from "react-router-dom";
 
 const API_URL = "http://localhost:5005";
 
@@ -48,6 +49,9 @@ function SignUpPage(){
             <div id="username-field">
               <label>Username:</label>
               <input type="text" name="username" onChange={(e) => setName(e.target.value)} />
+            </div>
+            <div>
+            <Link to="/login"> Already have an account? </Link>
             </div>
             <div id="submit-button">
               <button type="submit">Sign Up</button>

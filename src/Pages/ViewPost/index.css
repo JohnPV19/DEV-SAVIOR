@@ -110,11 +110,12 @@ body {
   
   /* Styles for the container wrapping the post details */
   #postDetails {
+    width: 80%; /* Set a specific width */
     border-radius: 10px;
     animation: neonBorder 2s infinite;
-    padding: 20px 30px; /* Adjust padding for space inside the box */
-    margin: 20px 0;
-    overflow: hidden;
+    padding: 20px 30px;
+    margin: 20px auto;
+    overflow: hidden; /* Hide overflowing content */
     word-wrap: break-word;
   }
   
@@ -136,11 +137,12 @@ body {
   
   /* Styles for comment items */
   .commentItem {
+    width: 80%; /* Set a specific width */
     border-radius: 10px;
     animation: neonBorder 2s infinite;
-    padding: 10px 20px; /* Adjust padding for space inside the box */
-    margin: 10px 0;
-    overflow: hidden;
+    padding: 10px 20px;
+    margin: 10px auto;
+    overflow: hidden; /* Hide overflowing content */
     word-wrap: break-word;
   }
   
