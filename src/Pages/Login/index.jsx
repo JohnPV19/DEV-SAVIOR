@@ -1,9 +1,9 @@
 import { useContext, useState } from 'react'; 
 import { AuthContext } from '../../Context/auth.context';
 import axios from 'axios';
+import './index.css';
 import { useNavigate } from 'react-router-dom';
-import authService from '../../services/auth.service';
-
+import { Link, useParams } from "react-router-dom";
 
 const API_URL = "https://devhub.adaptable.app";
 
@@ -21,9 +21,8 @@ function LoginPage(){
 
         const requestBody ={email, password, name};
 
-        authService
-        .login(requestBody)
-        .then((response)=>{
+        axios.post(`${API_URL}/auth/login`,requestBody)
+            .then((response)=>{
                 storeToken(response.data.authToken);
                 authenticateUser();
                 navigate('/')

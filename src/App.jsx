@@ -30,8 +30,8 @@ function App() {
            <Route path="/api/posts/:_id" element= {<ViewPost/>}/> 
            <Route path="/api/posts/edit/:_id" element= {<EditPost/>}/> 
            <Route path="/api/project/:_id" element= {<ProjectView/>}/> 
-           <Route path="/profile/:_id" element={<ProfilePage/>}/>
-           <Route path="/profile/:_id/edit" element= {<ProfileEdit/>}/> 
+           
+        
           </Routes>
        </div>
   )

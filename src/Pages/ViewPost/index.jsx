@@ -1,9 +1,19 @@
+import React, { useContext } from 'react'
 import axios from 'axios'
 import { useEffect, useState, navigate } from 'react'
 import { Link, useNavigate, useParams } from "react-router-dom"
 import { AuthContext } from '../../Context/auth.context';
 import './index.css';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
+
 const API_URL = "https://devhub.adaptable.app";
+
+const renderQuillContent = (content) => {
+    return (
+      <div dangerouslySetInnerHTML={{ __html: content }} />
+    );
+  };
 function ViewPost() {
   const navigate = useNavigate();
   const authContext = useContext(AuthContext);
@@ -45,6 +55,9 @@ function ViewPost() {
   const handleEditNavigate =()=>{
     navigate(`/api/posts/edit/${_id}`);
   };
+
+  
+
     // Deletes post
   const handleDeleteButton =()=>{
     // Shows a confirmation window
@@ -97,87 +110,88 @@ function ViewPost() {
   }
   return (
     <div id="viewPostContainer">
-  <h1>ViewPost</h1>
-  <div id="postDetails">
-    {!clickedPost && (
-      <div id="errorMessage">
-        <p>Sorry, we couldn't fetch that specific post</p>
+      <h1>ViewPost</h1>
+      <div id="postDetails">
+        {!clickedPost && (
+          <div id="errorMessage">
+            <p>Sorry, we couldn't fetch that specific post</p>
+          </div>
+        )}
+        {clickedPost && (
+          <div id="postContent">
+            <p>Title: {clickedPostTitle}</p>
+            {/* Render the ReactQuill content as HTML */}
+            <div>
+              <p>Text:</p>
+              {renderQuillContent(clickedPostText)}
+            </div>
+            <p>Image: {clickedPostImg}</p>
+            {/* Author, edit/delete buttons, and other content */}
+          </div>
+        )}
       </div>
-    )}
-    {clickedPost && (
-      <div id="postContent">
-        <p>Title: {clickedPostTitle}</p>
-        <p>Text: {clickedPostText}</p>
-        <p>Image: {clickedPostImg}</p>
-        {isAuthenticated ? (<>
-              <p>Author: <Link to="">{clickedPostUser}</Link></p></>):(<>
-              <p>Author: <Link to="/login">{clickedPostUser}</Link></p></>)}
-              {isAuthenticated ? (<>
-                <button onClick={handleEditNavigate}>Edit</button>
-                <button onClick={handleDeleteButton}>Delete</button></>):(<>
-                <button onClick={handleLoggedOutClick}>Edit</button>
-                <button onClick={handleLoggedOutClick}>Delete</button></>)}
+      <div id="repliesContainer">
+        <h2>Replies</h2>
+        <div id="comments">
+          {clickedPostComments.length === 0 && (
+            <div id="noComments">
+              <p>Be the first to comment this</p>
+            </div>
+          )}
+          {clickedPostComments.length > 0 && (
+            <div>
+              {clickedPostComments.map((post, index) => {
+                return (
+                  <div key={index} className="commentItem">
+                    <p>{post.content}</p>
+                    <p>{post.img}</p>
+                    {isAuthenticated ? (
+                      <p>replied by "<a href="">{post.username}</a></p>
+                    ) : (
+                      <p>replied by "<a href="/login">{post.username}</a></p>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          )}
+        </div>
       </div>
-    )}
-  </div>
-  <div id="repliesContainer">
-    <h2>Replies</h2>
-    <div id="comments">
-      {clickedPostComments.length === 0 && (
-        <div id="noComments">
-          <p>Be the first to comment this</p>
-        </div>
-      )}
-      {clickedPostComments.length > 0 && (
-        <div>
-          {clickedPostComments.map((post, index) => {
-            return (
-              <div key={index} className="commentItem">
-                <p>{post.content}</p>
-                <p>{post.img}</p>
-                {isAuthenticated ? (<>
-                    <p>replied by "<a href="">{post.username}</a></p></>):(<>
-                      <p>replied by "<a href="/login">{post.username}</a></p></>)}
-              </div>
-            );
-          })}
-        </div>
-      )}
+      <h4>Reply</h4>
+      <div id="replyForm">
+        <form>
+          <div>
+            <label>
+              Text:{" "}
+              <input
+                type="text"
+                value={replyText}
+                onChange={(e) => setReplyText(e.target.value)}
+                required
+              />
+            </label>
+          </div>
+          <div>
+            <label>
+              Image:{" "}
+              <input
+                type="img"
+                value={replyImg}
+                onChange={(e) => setReplyImg(e.target.value)}
+                required
+              />
+            </label>
+          </div>
+          <div>
+            {isAuthenticated ? (
+              <button onClick={handleReplySubmit}>Submit</button>
+            ) : (
+              <button onClick={handleLoggedOutClick}>Submit</button>
+            )}
+          </div>
+        </form>
+      </div>
     </div>
-  </div>
-  <h4>Reply</h4>
-  <div id="replyForm">
-    <form>
-      <div>
-        <label>
-          Text:{" "}
-          <input
-            type="text"
-            value={replyText}
-            onChange={(e) => setReplyText(e.target.value)}
-            required
-          />
-        </label>
-      </div>
-      <div>
-        <label>
-          Image:{" "}
-          <input
-            type="img"
-            value={replyImg}
-            onChange={(e) => setReplyImg(e.target.value)}
-            required
-          />
-        </label>
-      </div>
-      <div>
-      {isAuthenticated ? (<>
-              <button onClick={handleReplySubmit}>Submit</button></>):(<>
-                <button onClick={handleLoggedOutClick}>Submit</button></>)}
-      </div>
-    </form>
-  </div>
-</div>
-  )
+  );
 }
 export default ViewPost
