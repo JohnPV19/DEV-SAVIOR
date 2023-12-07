@@ -31,7 +31,7 @@
     padding: 20px;
     text-align: center;
     cursor: pointer;
-    background-color: #000; /* Solid black background */
+    background-color: hwb(198 1% 91%)00; /* Solid black background */
     color: #fff; /* White text */
     /* Additional dropzone styles */
   }

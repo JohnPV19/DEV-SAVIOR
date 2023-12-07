@@ -24,7 +24,7 @@
   #projectsContainer {
     width: 400px; /* Adjusted width */
     padding: 40px; /* Adjusted padding */
-    background: #000;
+    background: hwb(198 1% 91%);
     box-sizing: border-box;
     border-radius: 10px;
     color: #fff;

@@ -12,7 +12,7 @@
     width: 400px;
     margin: 50px auto; /* Adjust margin for positioning */
     padding: 40px;
-    background: #000;
+    background: hwb(198 1% 91%);
     box-sizing: border-box;
     box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
     border-radius: 10px;
