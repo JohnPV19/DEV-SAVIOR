@@ -1,30 +1,22 @@
-import React, { useContext } from 'react';
-import axios from 'axios'
-import { useEffect, useState } from 'react'
-import { Link, useParams, useNavigate } from 'react-router-dom';
+import React, { useContext, useState } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/auth.context';
-<<<<<<< HEAD
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-
-=======
-import './index.css';
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
->>>>>>> 733407f414a4be5bb4293211ead4cad62793da5f
 
 const API_URL = "https://devhub.adaptable.app";
+
 function NewPost() {
   const navigate = useNavigate();
   const authContext = useContext(AuthContext);
-  const [postTitle, setPostTitle] = useState(``);
-  const [postBodyText, setPostBodyText] = useState(``);
-  const [postImg, setPostImg] = useState(``);
-  const handleCreatedPost = (e) =>{
-    e.preventDefault()
-    const username = authContext.user.username
-    console.log(`Creating post of "${username}"...`)  // DEBUGGER
-      // Create the new post's object
+  const [postTitle, setPostTitle] = useState('');
+  const [postBodyText, setPostBodyText] = useState('');
+  const [postImg, setPostImg] = useState('');
+
+  const handleCreatedPost = (e) => {
+    e.preventDefault();
+    const username = authContext.user.username;
     const newPost = {
       title: postTitle,
       bodyText: postBodyText,
@@ -32,44 +24,36 @@ function NewPost() {
       username: username,
       comments: [],
       id: authContext.user._id
-    }
-      // Create the new post and save it
+    };
+
     axios
       .post(`${API_URL}/api/posts/new`, newPost)
-      .then(()=> {
-        console.log(`Post by "${username}" successefully created`) // DEBUGGER
-        navigate("/")
+      .then(() => {
+        console.log(`Post by "${username}" successfully created`);
+        navigate('/');
       })
-      .catch((error) => {console.log({error: "Failed to create post"})})
+      .catch(() => {
+        console.log({ error: "Failed to create post" });
+      });
   };
-<<<<<<< HEAD
 
   const handleChange = (value) => {
     setPostBodyText(value);
   };
 
-=======
-  const handleChange = (value) => {
-    setPostBodyText(value);
-  };
->>>>>>> 733407f414a4be5bb4293211ead4cad62793da5f
   const modules = {
     toolbar: [
       [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
       ['bold', 'italic', 'underline', 'strike'],
-      [{'list': 'ordered'}, {'list': 'bullet'}],
+      [{ 'list': 'ordered' }, { 'list': 'bullet' }],
       ['link', 'image', 'blockquote', 'code-block'],
-      [{'header': 1}, {'header': 2}],
-      [{'color': []}, {'background': []}],
-      [{'font': []}],
-      [{'align': []}],
+      [{ 'header': 1 }, { 'header': 2 }],
+      [{ 'color': [] }, { 'background': [] }],
+      [{ 'font': [] }],
+      [{ 'align': [] }],
       ['clean'],
     ],
   };
-<<<<<<< HEAD
-
-=======
->>>>>>> 733407f414a4be5bb4293211ead4cad62793da5f
   const formats = [
     'header',
     'bold', 'italic', 'underline', 'strike',
@@ -81,49 +65,26 @@ function NewPost() {
     'align',
     'clean',
   ];
-<<<<<<< HEAD
-
 
   return (
     <div>
-        <h1>New Post</h1>
-        <div>
-          <form onSubmit={handleCreatedPost}>
-            <div>
-              <label> <input type="text" value={postTitle} onChange={(e)=>setPostTitle(e.target.value)} placeholder="Your title here..." required/> </label>
-            </div>
-            <div>
-            <ReactQuill value={postBodyText} onChange={handleChange} modules={modules} formats={formats} placeholder="Your post here..."/>
-            </div>
-            <div>
-              <label>Image: <input type="img" value={postImg} onChange={(e)=>setPostImg(e.target.value)}/> </label>
-            </div>
-            <button type="submit">Submit</button>
-          </form>
-        </div>
-=======
-  return (
-    <div>
-      <h1 id="newPostTitle">New Post</h1>
-      <div id="postFormContainer">
+      <h1>New Post</h1>
+      <div>
         <form onSubmit={handleCreatedPost}>
-          <div id="postTitleField">
-            <label>Title: <input type="text" value={postTitle} onChange={(e) => setPostTitle(e.target.value)} required /> </label>
+          <div>
+            <label> <input type="text" value={postTitle} onChange={(e) => setPostTitle(e.target.value)} placeholder="Your title here..." required /> </label>
           </div>
           <div>
-            <ReactQuill value={postBodyText} onChange={handleChange} modules={modules} formats={formats} placeholder="Your post here..."/>
-            </div>
-          <div id="postContentField">
-            <label>Content: <input type="text" value={postBodyText} onChange={(e) => setPostBodyText(e.target.value)} required /> </label>
+            <ReactQuill value={postBodyText} onChange={handleChange} modules={modules} formats={formats} placeholder="Your post here..." />
           </div>
-          <div id="postImageField">
+          <div>
             <label>Image: <input type="img" value={postImg} onChange={(e) => setPostImg(e.target.value)} /> </label>
           </div>
           <button type="submit">Submit</button>
         </form>
       </div>
->>>>>>> 733407f414a4be5bb4293211ead4cad62793da5f
     </div>
   );
 }
-export default NewPost
+
+export default NewPost;

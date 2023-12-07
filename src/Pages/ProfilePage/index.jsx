@@ -7,29 +7,37 @@ import './index.css';
 
 const API_URL = "https://devhub.adaptable.app";
 
-const API_URL = "http://localhost:5005";
+
 
 function ProfilePage() {
     const navigate = useNavigate();
     const authContext = useContext(AuthContext);
     const {_id} = useParams();
     const [userData, setUserData] = useState([]);
+    const [avatarUrl, setAvatarUrl] = useState('');
     useEffect(()=>{
         axios
         .get(`${API_URL}/api/profile/${_id}/user`)
         .then((response)=> {
             setUserData(response.data)
-            console.log("TESTE:" , response.data)
+            if (response.data.avatar) {
+                const bufferData = response.data.avatar.data;
+                const uint8Array = new Uint8Array(bufferData);
+                const base64String = btoa(String.fromCharCode.apply(null, uint8Array));
+                const imageUrl = `data:image/jpeg;base64,${base64String}`;
+                setAvatarUrl(imageUrl);
+                console.log("userData:", userData)
+              }
             })
         .catch((error)=>console.log(error))
-    }, [])
+    }, [_id])
   return (
     <div>
-        <div> <img src="" alt="" />
+        <div>
             {!userData.avatar &&
             <p>Show us your face</p>}
             {userData.avatar &&
-            <img src={userData.avatar} alt="user_avatar" />
+            <img src={avatarUrl}  style={{ width: '100px', height: 'auto' }}/>
             }
         </div>
         <div>
@@ -50,9 +58,9 @@ function ProfilePage() {
         </div>
         <div>
             <h4>Projects:</h4>
-            {!userData.createdProjects &&
+            {userData.createdProjects == [] &&
             <p>Add your first project...</p>}
-            {userData.createdProjects&&
+            {userData.createdProjects &&
             userData.createdProjects.map((project, index)=>{
                 return(
                     <div key={index}>
@@ -63,10 +71,10 @@ function ProfilePage() {
         </div>
         <div>
             <h4>Skills:</h4>
-            {userData.skills &&
+            {!userData.skills &&
             <p>Show us your skills</p>}
-            {!userData.skills === "" &&
-            userData.skills.map((skill, index)=>{
+            {userData.skills &&
+            (userData.skills).map((skill, index)=>{
                 return(
                     <div key={index}>
                     <p>{skill}</p>
@@ -76,10 +84,10 @@ function ProfilePage() {
         </div>
         <div>
             <h4>Interests:</h4>
-            {userData.interests &&
+            {!userData.interests &&
             <p>What are you into?</p>}
-            {!userData.interests === "" &&
-            userData.interests.map((interest, index)=>{
+            {userData.interests &&
+            (userData.interests).map((interest, index)=>{
                 return(
                     <div key={index}>
                     <p>{interest}</p>
