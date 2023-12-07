@@ -13,55 +13,59 @@ function ProfilePage() {
     const navigate = useNavigate();
     const authContext = useContext(AuthContext);
     const {_id} = useParams();
-    const [userData, setUserData] = useState([]);
+    const [user, setUser] = useState([]);
     const [avatarUrl, setAvatarUrl] = useState('');
     useEffect(()=>{
         axios
         .get(`${API_URL}/api/profile/${_id}/user`)
         .then((response)=> {
-            setUserData(response.data)
             if (response.data.avatar) {
                 const bufferData = response.data.avatar.data;
                 const uint8Array = new Uint8Array(bufferData);
                 const base64String = btoa(String.fromCharCode.apply(null, uint8Array));
                 const imageUrl = `data:image/jpeg;base64,${base64String}`;
                 setAvatarUrl(imageUrl);
-                console.log("userData:", userData)
+                setUser(response.data)
+                console.log("userData:", user)
+                console.log(response.data)
               }
             })
         .catch((error)=>console.log(error))
     }, [_id])
+    useEffect(() => {
+        // Log user state after it's updated
+        console.log('User Data:', user);
+      }, [user]); // Add a separate useEffect for logging when user state changes
   return (
     <div>
         <div>
-            {!userData.avatar &&
+            {!user.avatar &&
             <p>Show us your face</p>}
-            {userData.avatar &&
-            <img src={avatarUrl}  style={{ width: '100px', height: 'auto' }}/>
-            }
+            {user.avatar &&
+            <img src={avatarUrl} style={{ width: '100px', height: 'auto' }} />}
         </div>
         <div>
             <h4>Username:</h4>
-            <p>{userData.username}</p>
+            <p>{user.username}</p>
         </div>
         <div>
             <h4>E-mail:</h4>
-            <p>{userData.email}</p>
+            <p>{user.email}</p>
         </div>
         <div>
             <h4>Name:</h4>
-            {!userData.firstName &&
+            {!user.firstName &&
             <p>Who are you?</p>}
-            {userData.lastName &&
-            <p>{userData.firstName} {userData.lastName}</p>
+            {user.lastName &&
+            <p>{user.firstName} {user.lastName}</p>
             }
         </div>
         <div>
             <h4>Projects:</h4>
-            {userData.createdProjects == [] &&
+            {user.createdProjects == [] &&
             <p>Add your first project...</p>}
-            {userData.createdProjects &&
-            userData.createdProjects.map((project, index)=>{
+            {user.createdProjects &&
+            user.createdProjects.map((project, index)=>{
                 return(
                     <div key={index}>
                     <Link to={`/api/project/${project._id}`}><p>{project.fileName}</p></Link>
@@ -71,10 +75,10 @@ function ProfilePage() {
         </div>
         <div>
             <h4>Skills:</h4>
-            {!userData.skills &&
+            {!user.skills &&
             <p>Show us your skills</p>}
-            {userData.skills &&
-            (userData.skills).map((skill, index)=>{
+            {user.skills &&
+            (user.skills).map((skill, index)=>{
                 return(
                     <div key={index}>
                     <p>{skill}</p>
@@ -84,10 +88,10 @@ function ProfilePage() {
         </div>
         <div>
             <h4>Interests:</h4>
-            {!userData.interests &&
+            {!user.interests &&
             <p>What are you into?</p>}
-            {userData.interests &&
-            (userData.interests).map((interest, index)=>{
+            {user.interests &&
+            (user.interests).map((interest, index)=>{
                 return(
                     <div key={index}>
                     <p>{interest}</p>
@@ -97,10 +101,10 @@ function ProfilePage() {
         </div>
         <div>
             <h4>Your Posts:</h4>
-            {!userData.createdPosts &&
+            {!user.createdPosts &&
             <p>You haven't created any posts</p>}
-            {userData.createdPosts &&
-            userData.createdPosts.map((post, index)=>{
+            {user.createdPosts &&
+            user.createdPosts.map((post, index)=>{
                 console.log("test" , post.title)
                 return(
                     <div key={index}>

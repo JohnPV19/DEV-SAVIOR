@@ -2,8 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios'; // Import Axios for making API requests
 import './index.css'
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 const API_URL = "https://devhub.adaptable.app";
 
+const renderQuillContent = (content) => {
+  return (
+    <div dangerouslySetInnerHTML={{ __html: content }} />
+  );
+};
 
 function SearchBar({ onSearch }) {
   const [searchTerm, setSearchTerm] = useState('');
@@ -62,7 +69,7 @@ return (
           <Link to={`/api/posts/${suggestion._id}`}>
             <div>
               <h3>{suggestion.title}</h3>
-              <p>{suggestion.bodyText}</p>
+               <p>{renderQuillContent(suggestion.bodyText)}</p>
             </div>
           </Link>
         </div>
