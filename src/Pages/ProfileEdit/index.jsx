@@ -1,29 +1,38 @@
 import React, { useContext } from 'react';
 import axios from 'axios'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/auth.context';
+
+
 import TagsInput from 'react-tagsinput'
 import 'react-tagsinput/react-tagsinput.css'
 import Select from 'react-select'
 import makeAnimated from 'react-select/animated';
 import { useDropzone } from 'react-dropzone';
+
 const API_URL = "https://devhub.adaptable.app";
+
 function ProfileEdit() {
+
     const navigate = useNavigate();
-    const authContext = useContext(AuthContext);
+    const authContext = useContext(AuthContext); 
     const {_id} = useParams();
+
     const [userData, setUserData] = useState([]);
     const [email, setEmail] = useState('');
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [avatar, setAvatar] = useState('');
     const [interests, setInterests] = useState([]);
+
     const [tags, setTags] = useState([]);
     const [selectedSkills, setSelectedSkills] = useState([]);
     const [dataLoaded, setDataLoaded] = useState(false);
     const [previewImages, setPreviewImages] = useState([]);
     const [file, setFile] = useState([]);
+
+
     useEffect(()=>{
       axios
       .get(`${API_URL}/api/profile/${_id}/user`)
@@ -52,9 +61,13 @@ function ProfileEdit() {
             })
         .catch((error)=>console.log(error))
     }, [_id])
+
+
         // Edit Button
     const handleFormSubmit = () => {
+
       const formData = new FormData();
+
         if (file.length > 0) {
           formData.append('avatar', file[0].file);
         } else {
@@ -66,10 +79,13 @@ function ProfileEdit() {
           tags.forEach((tag, index) => {
           formData.append(`interests[${index}]`, tag);
   });
+
           selectedSkills.forEach((skill, index) => {
           formData.append(`skills[${index}]`, skill.label);
   });
+
         console.log("formData:", formData)
+
         axios
         .put(`${API_URL}/api/profile/${_id}/edit`, formData, {
           headers: {
@@ -82,11 +98,14 @@ function ProfileEdit() {
           })
           .catch((error) => console.log(error));
       };
-        // react-tagsinput
+
+
+        // react-tagsinput   
     const handleChange = newTags => {
         setTags(newTags);
         setInterests(newTags.map((tag) => tag.toLowerCase()))
 };
+            
         // react-select
 const options = [
   { value: 'JavaScript', label: 'JavaScript' },
@@ -104,21 +123,27 @@ const options = [
   { value: 'Angular', label: 'Angular' },
   { value: 'Django', label: 'Django' },
   { value: 'Flask', label: 'Flask' },
-  { value: 'Git', label: 'Git' },]
+  { value: 'Git', label: 'Git' },] 
+
  const handleSelectChange = (selectedValues) => {
     setSelectedSkills(selectedValues);
   };
+
+
     // Dropzone
     const onDrop = useCallback((acceptedFiles) => {
       // Do something with the accepted files
       console.log(acceptedFiles);
+  
       const previewImageFiles = acceptedFiles.map((file) => ({
         file,
         preview: URL.createObjectURL(file),
       }));
+  
       setFile(previewImageFiles); // Store files in the state
       setPreviewImages(previewImageFiles);
     }, []);
+    
     const {
       getRootProps,
       getInputProps,
@@ -128,7 +153,11 @@ const options = [
       onDrop,
       multiple: true, // Allow multiple file selection
     });
+
     const isInvalidType = isDragReject || previewImages.some((image) => !['image/jpeg', 'image/png'].includes(image.file.type));
+  
+
+
   return (
     <div>
       <div {...getRootProps()} className={`dropzone ${isDragActive ? 'active' : ''} ${isInvalidType ? 'invalid' : ''}`}>
@@ -148,24 +177,25 @@ const options = [
           </ul>
         </div>
       )}
-        <div>
-            <h4>E-mail:</h4>
+        <div> 
+            <h4>E-mail:</h4> 
             <form>
-            <input type="text" value={email} onChange={(e)=>setEmail(e.target.value)} placeholder={`${userData.email}`} required />
+            <input type="text" value={email} onChange={(e)=>setEmail(e.target.value)} placeholder={`${userData.email}`} required /> 
             </form>
         </div>
         <div>
             <h4>First Name:</h4>
             <form>
-            <input type="text" value={firstName} onChange={(e)=>setFirstName(e.target.value)} placeholder={userData.firstName ? userData.firstName : "First Name"}  />
+            <input type="text" value={firstName} onChange={(e)=>setFirstName(e.target.value)} placeholder={userData.firstName ? userData.firstName : "First Name"}  /> 
             </form>
         </div>
         <div>
             <h4>Last Name:</h4>
             <form>
-            <input type="text" value={lastName} onChange={(e)=>setLastName(e.target.value)} placeholder={userData.lastName ? userData.lastName : "Last Name"}  />
+            <input type="text" value={lastName} onChange={(e)=>setLastName(e.target.value)} placeholder={userData.lastName ? userData.lastName : "Last Name"}  /> 
             </form>
         </div>
+        
         <div>
             <h4>Skills:</h4>
             {userData.skills && (
@@ -186,7 +216,7 @@ const options = [
             </div>
           </div>
         )}
-            <div>
+            <div> 
             <h4>Interests:</h4>
                 <TagsInput
                     value={tags}
@@ -208,11 +238,5 @@ const options = [
     </div>
   )
 }
+
 export default ProfileEdit
-
-
-
-
-
-
-

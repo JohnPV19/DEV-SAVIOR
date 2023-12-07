@@ -121,12 +121,10 @@ function ViewPost() {
           <div id="postContent">
             <p>Title: {clickedPostTitle}</p>
             {/* Render the ReactQuill content as HTML */}
-            <div>
+            
               <p>Text:</p>
               {renderQuillContent(clickedPostText)}
-            </div>
-            <p>Image: {clickedPostImg}</p>
-            {/* Author, edit/delete buttons, and other content */}
+
           </div>
         )}
       </div>

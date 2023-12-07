@@ -12,6 +12,7 @@ import ProjectView from './Pages/ProjectPages/ProjecView'
 import Projects from './Pages/ProjectPages/AllProjects'
 import ProfilePage from './Pages/ProfilePage'
 import ProfileEdit from './Pages/ProfileEdit'
+
 function App() {
 
   return ( 
