@@ -1,13 +1,8 @@
 import axios from 'axios';
 import { useState } from 'react';
-<<<<<<< HEAD
-import { useNavigate } from 'react-router-dom';
-import authService from '../../services/auth.service';
-=======
 import './index.css';
 import { useNavigate } from 'react-router-dom';
 import { Link, useParams } from "react-router-dom";
->>>>>>> 733407f414a4be5bb4293211ead4cad62793da5f
 
 const API_URL = "https://devhub.adaptable.app";
 
