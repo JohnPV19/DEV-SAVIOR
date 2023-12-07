@@ -10,7 +10,7 @@ import 'react-tagsinput/react-tagsinput.css'
 import Select from 'react-select'
 import makeAnimated from 'react-select/animated';
 import { useDropzone } from 'react-dropzone';
-
+import './index.css';
 const API_URL = "https://devhub.adaptable.app";
 
 function ProfileEdit() {
@@ -107,6 +107,16 @@ function ProfileEdit() {
 };
             
         // react-select
+        const customStyles = {
+            control: (provided, state) => Object.assign({}, provided, {
+              backgroundColor: 'black;',  // Set your desired background color here
+
+            }),
+            menu: (provided, state) => ({
+                ...provided,
+                backgroundColor: 'black',
+          })};
+
 const options = [
   { value: 'JavaScript', label: 'JavaScript' },
   { value: 'MongoDB', label: 'MongoDB' },
@@ -156,7 +166,7 @@ const options = [
 
     const isInvalidType = isDragReject || previewImages.some((image) => !['image/jpeg', 'image/png'].includes(image.file.type));
   
-
+    
 
   return (
     <div>
@@ -205,6 +215,7 @@ const options = [
               isMulti
               value={selectedSkills}
               onChange={handleSelectChange}
+              styles={customStyles}
             />
             <div>
               <p>Selected Skills:</p>

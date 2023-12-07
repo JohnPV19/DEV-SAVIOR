@@ -102,7 +102,7 @@ function ProjectView() {
       <SyntaxHighlighter language="plaintext" style={okaidia}>
         {projectDetails.saveDate}
       </SyntaxHighlighter>
-      <p>Author: <a href="/">{projectDetails.username}</a></p>
+      <p>Author: <a href="">{projectDetails.username}</a></p>
       <button onClick={handleDeleteButton}>Delete</button>
     </div>
   )}

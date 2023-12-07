@@ -41,87 +41,77 @@ function ProfilePage() {
       
       return (
         <div className="profile-container">
-            <div className="profile-image">
-                {!user.avatar &&
-                <p>Show us your face</p>}
-                {user.avatar && 
-                <img src={avatarUrl} style={{ width: '100px', height: 'auto' }} />}
-            </div>
-            <div className="profile-details">
-                <h4>Username:</h4> 
-                <p>{user.username}</p>
-            </div>
-            <div> 
-                <h4>E-mail:</h4> 
+          <div className="left-section">
+                <div className="profile-image">
+                     {!user.avatar && <p>Show us your face</p>}
+                        {user.avatar && (
+                         <img src={avatarUrl} style={{ width: '200px', height: '200px' }} alt="User Avatar" />
+                     )}
+                </div>
+
+
+          <div className="profile-details">
+              <h3>WELCOME:</h3>
+              <h3>{user.username}</h3>
+              <div>
+                <h4>E-mail:</h4>
                 <p>{user.email}</p>
-            </div>
-            <div>
+              </div>
+              <div>
                 <h4>Name:</h4>
-                {!user.firstName &&
-                <p>Who are you?</p>}
-                {user.lastName &&
-                <p>{user.firstName} {user.lastName}</p>
-                }
-            </div>
-            <div> 
-                <h4>Projects:</h4> 
-                {user.createdProjects == [] && 
-                <p>Add your first project...</p>}
-                {user.createdProjects && 
-                user.createdProjects.map((project, index)=>{
-                    return(
-                        <div key={index}> 
-                        <Link to={`/api/project/${project._id}`}><p>{project.fileName}</p></Link>
-                        </div>
-                    )
-                })}
-            </div>
-            <div>
-                <h4>Skills:</h4>
-                {!user.skills &&
-                <p>Show us your skills</p>}
-                {user.skills &&
-                (user.skills).map((skill, index)=>{
-                    return(
-                        <div key={index}> 
-                        <p>{skill}</p>
-                        </div>
-                    )
-                })}
-            </div>
-            <div>
-                <h4>Interests:</h4>
-                {!user.interests &&
-                <p>What are you into?</p>}
-                {user.interests &&
-                (user.interests).map((interest, index)=>{
-                    return(
-                        <div key={index}> 
-                        <p>{interest}</p>
-                        </div>
-                    )
-                })}
-            </div> 
-            <div>
-                <h4>Your Posts:</h4>
-                {!user.createdPosts &&
-                <p>You haven't created any posts</p>}
-                {user.createdPosts &&
-                user.createdPosts.map((post, index)=>{
-                    console.log("test" , post.title)
-                    return(
-                        <div key={index}> 
-                        <Link to={`/api/posts/${post._id}`}><p>{post.title}</p></Link>
-                        </div>
-                    )
-                })}
-            </div> 
-            <div>
-                <a href={`/profile/${_id}/edit`}><button>Edit Profile</button></a>
+                <p>{`${user.firstName} ${user.lastName}`}</p>
+              </div>
+                </div> 
                 
-            </div>
+                <div>
+                <a href={`/profile/${_id}/edit`}>
+                  <button>Edit Profile</button>
+                </a>
+              </div>
         </div>
-      )
-    }
+              <div className='mid-section'>
+              <div id="Interests">
+                <h4>Interests:</h4>
+                <div>
+                  {user.interests && user.interests.map((interest, index) => (
+                    <p key={index}>{interest}</p>
+                  ))}
+                  {/* Add other interests here */}
+                </div>
+              </div>
+             
+            
+          
+           <div id="Skills">
+                <h4>Skills:</h4>
+                <div>
+                  {user.skills && user.skills.map((skill, index) => (
+                    <p key={index}>{skill}</p>
+                  ))}
+                  {/* Add other skills here */}
+                </div>
+              </div>
+          </div>
+        
+          <div className="right-section">
+         
+
+            <div id="Projects">
+              <h4>Projects:</h4>
+              <div>
+                <p>No projects available</p>
+              </div>
+            </div>
+            <div id="YourPosts">
+              <h4>Your Posts:</h4>
+              <div>
+                <p>No posts available</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    };
+    
     
     export default ProfilePage

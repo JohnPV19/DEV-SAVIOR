@@ -121,9 +121,16 @@ function ViewPost() {
           <div id="postContent">
             <p>Title: {clickedPostTitle}</p>
             {/* Render the ReactQuill content as HTML */}
-            
-              <p>Text:</p>
+            <p>Text:</p>
               {renderQuillContent(clickedPostText)}
+              {isAuthenticated ? (<>
+              <p>Author: <Link to="">{clickedPostUser}</Link></p></>):(<>
+              <p>Author: <Link to="/login">{clickedPostUser}</Link></p></>)}
+              {isAuthenticated ? (<>
+                <button onClick={handleEditNavigate}>Edit</button>
+                <button onClick={handleDeleteButton}>Delete</button></>):(<>
+                <button onClick={handleLoggedOutClick}>Edit</button>
+                <button onClick={handleLoggedOutClick}>Delete</button></>)}
 
           </div>
         )}
@@ -170,15 +177,6 @@ function ViewPost() {
             </label>
           </div>
           <div>
-            <label>
-              Image:{" "}
-              <input
-                type="img"
-                value={replyImg}
-                onChange={(e) => setReplyImg(e.target.value)}
-                required
-              />
-            </label>
           </div>
           <div>
             {isAuthenticated ? (

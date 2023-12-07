@@ -4,8 +4,9 @@
   }
   
   #homepage h1 {
-    font-size: 36px;
+    font-size: 80px;
     margin-bottom: 20px;
+    ;
   }
   
   #homepage h2 {
@@ -28,11 +29,22 @@
     border-radius: 10px;
     padding: 20px;
     background-color: #333;
+    transition: background-color 0.3s ease;
+    background: hwb(198 1% 91%);
+  }
+  .postBox:hover{
+    background-color: #024e3f;
+  }
+  .postBox a{
+    color: white;
   }
   
   .postTitle {
     font-size: 20px;
     margin-bottom: 10px;
+    margin-right: 65%;
+    color:white;
+    text-decoration: underline;
   }
   
   .postText {

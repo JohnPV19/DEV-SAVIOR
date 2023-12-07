@@ -49,7 +49,7 @@ function LoginPage(){
                     <p><Link to="/signup"> Don't have an account?  </Link></p>
                 </div>
                 <div>
-                    <button type ="submit">Sign Up</button>
+                    <button type ="submit">Login</button>
                 </div>
                 {error && <p>{error}</p>}
             </form>

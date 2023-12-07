@@ -34,7 +34,7 @@ function HomePage() {
 
   return (
     <div id="homepage">
-      <h1>HOMEPAGE</h1>
+      <h1>Snips</h1>
       <h2>All Posts</h2>
       <div id="postsContainer">
         <div id="postsList">

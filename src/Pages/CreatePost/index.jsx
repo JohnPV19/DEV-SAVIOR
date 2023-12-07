@@ -74,9 +74,7 @@ function NewPost() {
           <div id="postContentField">
             <ReactQuill value={postBodyText} onChange={handleChange} modules={modules} formats={formats} placeholder="Your post here..."/>
             </div>
-          <div id="postImageField">
-            <label>Image: <input type="img" value={postImg} onChange={(e) => setPostImg(e.target.value)} /> </label>
-          </div>
+            <br />
           <button type="submit">Submit</button>
         </form>
       </div>

@@ -1,5 +1,5 @@
 body {
-    background-color: #111; /* Adjusted the background color to a darker shade of black */
+    background-color: hwb(200 1% 89%); /* Adjusted the background color to a darker shade of black */
     color: #fff; /* Text color */
   }
   
@@ -30,7 +30,7 @@ body {
     background-color: #007bff;
     color: #fff;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+ 
   }
   
   #postContent button:hover {
@@ -79,7 +79,7 @@ body {
     padding: 8px;
     border: none;
     border-radius: 5px;
-    background: rgba(255, 255, 255, 0.1);
+    background: hwb(198 1% 91%);
     color: #fff;
     font-size: 16px;
     margin-bottom: 10px;
@@ -95,7 +95,7 @@ body {
     color: #fff;
     font-weight: bold;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+   
   }
   
   #replyForm button[type="submit"]:hover {
@@ -103,46 +103,36 @@ body {
   }
 
   /* Body styles */
-body {
-    background-color: #111; /* Dark background */
-    color: #fff; /* Text color */
-  }
+
   
   /* Styles for the container wrapping the post details */
   #postDetails {
     width: 80%; /* Set a specific width */
     border-radius: 10px;
-    animation: neonBorder 2s infinite;
     padding: 20px 30px;
     margin: 20px auto;
     overflow: hidden; /* Hide overflowing content */
     word-wrap: break-word;
+    background: hwb(198 1% 91%);
   }
-  
+  #postDetails:hover{
+    background-color: #024e3f;
+  }
   /* Keyframes for the neon effect */
-  @keyframes neonBorder {
-    0% {
-      box-shadow: 0 0 5px 2px rgba(0, 123, 255, 0.5), 0 0 10px 5px rgba(0, 123, 255, 0.5), inset 0 0 5px rgba(0, 123, 255, 0.5);
-      border: 2px solid rgba(0, 123, 255, 0.5);
-    }
-    50% {
-      box-shadow: 0 0 10px 5px rgba(0, 123, 255, 0.7), 0 0 15px 7px rgba(0, 123, 255, 0.7), inset 0 0 7px rgba(0, 123, 255, 0.7);
-      border: 2px solid rgba(0, 123, 255, 0.7);
-    }
-    100% {
-      box-shadow: 0 0 5px 2px rgba(0, 123, 255, 0.5), 0 0 10px 5px rgba(0, 123, 255, 0.5), inset 0 0 5px rgba(0, 123, 255, 0.5);
-      border: 2px solid rgba(0, 123, 255, 0.5);
-    }
-  }
+  
   
   /* Styles for comment items */
   .commentItem {
     width: 80%; /* Set a specific width */
     border-radius: 10px;
-    animation: neonBorder 2s infinite;
     padding: 10px 20px;
     margin: 10px auto;
     overflow: hidden; /* Hide overflowing content */
     word-wrap: break-word;
+    transition: background-color 0.3s ease;
+    background: hwb(198 1% 91%);
   }
   
+  .commentItem:hover{
+    background-color: #024e3f;
+  }

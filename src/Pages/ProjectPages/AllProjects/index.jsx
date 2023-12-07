@@ -29,8 +29,8 @@ function Projects() {
   return (
     <div className="projectsWrapper">
     <div id="projectsContainer">
-    <h1 id="projectsTitle">Projects</h1>
-    <h2 id="allProjectsTitle">All Projects</h2>
+    <h1 id="projectsTitle">Snippet</h1>
+    <h2 id="allProjectsTitle">All Snippets</h2>
     <div id="projectsListContainer">
       {projectsList &&
         projectsList.map((project, index) => (

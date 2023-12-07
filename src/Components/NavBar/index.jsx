@@ -20,33 +20,34 @@ export default function Navbar(){
             <ul>
             <div id="inner-nav">
                 <div id="logo">
-                    <h2>Logo</h2>
+                    <Link to="/">
+                    <img src="/images/Snips_logo.png" alt="Snips" width="px" height="auto" /></Link>
                 </div>
                 <div id="nav-links">
                     <div id="left-links">
-                        <div><Link to="/"> Home </Link></div>
+                    
                         {isAuthenticated ? (
                             <>
                                 <div><Link to="/newpost"> New Post </Link></div>
-                                <div><Link to="/api/projects/upload"> New Projects </Link></div>
+                                <div><Link to="/api/projects/upload"> New Snippet </Link></div>
                             </>
                         ) : (
                             <>
                                 <div><Link to="/login"> New Post </Link></div>
-                                <div><Link to="/login"> New Projects </Link></div>
+                                <div><Link to="/login"> New Snippet </Link></div>
                             </>
                         )}
                     
                     
                         {isAuthenticated ? (
                             <>
-                                <div><Link to="/projects"> Projects </Link></div>
+                                <div><Link to="/projects"> Snippets </Link></div>
                                 <div><Link to={`/profile/${_id}`}> Profile </Link></div>
                                 <div><Link onClick={handleLogOut} to="/"> Log Out </Link></div>
                             </>
                         ) : (
                             <>
-                                <div><Link to="/login"> Projects </Link></div>
+                                <div><Link to="/login"> Snippets </Link></div>
                                 <div><Link to="/login"> Profile </Link></div>
                                 <div><Link to="/login"> Login </Link></div>
                                 <div><Link to="/signup"> SignUp </Link></div>

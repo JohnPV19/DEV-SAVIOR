@@ -2,7 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import { useEffect, useState, navigate } from 'react'
 import { Link, useNavigate, useParams } from "react-router-dom"
-
+import './index.css'
 
 const API_URL = "https://devhub.adaptable.app";
 
@@ -54,34 +54,49 @@ function handlePostEdit(e){
  };
 
 
-  return (
+ return (
+  <div id="edit-post-wrapper">
     <div>
-        <h1>EditPost</h1>
-        <div>
-          {!postToEdit &&  // Renders error message if clicked Post wasn't found/properly opened
+      <h1>EditPost</h1>
+      <div>
+        {!postToEdit && (
           <div>
             <p>Error trying to edit post</p>
           </div>
-          }
-          {postToEdit && // Renders clicked Post details
+        )}
+        {postToEdit && (
           <div>
-            <form onSubmit={handlePostEdit}> 
-                <div>
-                <label>Title: <input type="text" name="title" value={postTitleToEdit} onChange={(e)=>setPostTitleToEdit(e.target.value)}/></label>
-                </div>
-                <div>
-                <label>Text: <input type="text" name="bodyText" value={postTextToEdit} onChange={(e)=>setPostTextToEdit(e.target.value)}/></label>
-                </div>
-                <div>
-                <label>Image: <input type="text" name="image" value={postImgToEdit} onChange={(e)=>setPostImgToEdit(e.target.value)}/></label>
-                </div> 
-                <button type="submit">Edit Post</button>
+            <form onSubmit={handlePostEdit}>
+              <div>
+                <label>
+                  Title:{" "}
+                  <input
+                    type="text"
+                    name="title"
+                    value={postTitleToEdit}
+                    onChange={(e) => setPostTitleToEdit(e.target.value)}
+                  />
+                </label>
+              </div>
+              <div>
+                <label>
+                  Text:{" "}
+                  <input
+                    type="text"
+                    name="bodyText"
+                    value={postTextToEdit}
+                    onChange={(e) => setPostTextToEdit(e.target.value)}
+                  />
+                </label>
+              </div>
+              <button type="submit">Edit Post</button>
             </form>
           </div>
-        }
-        </div>
+        )}
+      </div>
     </div>
-  )
+  </div>
+);
 }
 
 export default EditPost

@@ -53,7 +53,7 @@ useEffect(() => {
 
 return (
   <div id="searchContainer">
-  <label htmlFor="searchInput">Search:</label>
+  <label htmlFor="searchInput"></label>
   <input
     type="text"
     id="searchInput"

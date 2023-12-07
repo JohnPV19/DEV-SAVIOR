@@ -37,7 +37,7 @@ function NewProject() {
 
 return (
   <div>
-    <h1 id="newProjectTitle">New Project</h1>
+    <h1 id="newProjectTitle">New Snippet</h1>
     <div id="dropzoneContainer">
       <Dropzone onDrop={handleFileUpload}>
         {({ getRootProps, getInputProps }) => (
