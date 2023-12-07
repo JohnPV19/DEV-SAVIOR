@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useState } from 'react';
-
 import { useNavigate } from 'react-router-dom';
+import authService from '../../services/auth.service';
 
 const API_URL = "http://localhost:5005";
 
@@ -21,7 +21,8 @@ function SignUpPage(){
         // Create a request body object
         const requestBody ={email, password, username};
 
-        axios.post(`${API_URL}/auth/signup`, requestBody)
+        authService
+            .signup(requestBody)
             .then(()=>{
                 navigate('/login');
             })

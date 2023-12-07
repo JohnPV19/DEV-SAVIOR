@@ -1,12 +1,15 @@
-import React, { useContext } from 'react'
 import axios from 'axios'
 import { useEffect, useState, navigate } from 'react'
 import { Link, useNavigate, useParams } from "react-router-dom"
 import { AuthContext } from '../../Context/auth.context';
+import React, {useContext} from 'react';
+
 const API_URL = "http://localhost:5005";
 function ViewPost() {
   const navigate = useNavigate();
   const authContext = useContext(AuthContext);
+    const isAuthenticated = authContext.isLoggedIn;
+
   const {_id} = useParams();
   const [clickedPost, setClickedPost] = useState([]);
   const [clickedPostTitle, setClickedPostTitle] = useState("");
@@ -18,21 +21,25 @@ function ViewPost() {
   const [replyText, setReplyText] = useState("");
   const [replyImg, setReplyImg] = useState("");
     // Fetches and saves clicked Post properties from the Homepage
-  useEffect(()=>{
-    axios
-    .get(`${API_URL}/api/posts/${_id}`)
-    .then((response)=>{
-      const postData = response.data;
-      setClickedPost(postData);
-      setClickedPostTitle(postData.title);
-      setClickedPostText(postData.bodyText);
-      setClickedPostImg(postData.img);
-      setClickedPostUser(postData.username);
-      setClickedPostComments(postData.comments);
-      console.log(`Viewing post of "${postData.username}"`) // DEBUGGER
-    })
-    .catch(()=>console.log({error: "Failed to fetch specified post"}))
-  }, [])
+  const updateComments = () => {
+      axios
+        .get(`${API_URL}/api/posts/${_id}`)
+        .then((response) => {
+          const postData = response.data;
+          setClickedPost(postData);
+          setClickedPostTitle(postData.title);
+          setClickedPostText(postData.bodyText);
+          setClickedPostImg(postData.img);
+          setClickedPostUser(postData.username);
+          setClickedPostComments(postData.comments);
+          console.log(`Viewing post of "${postData.username}"`); // DEBUGGER
+        })
+        .catch(() => console.log({ error: "Failed to fetch specified post" }));
+    };
+    // useEffect to trigger the fetching of the post data based on _id
+    useEffect(() => {
+      updateComments();
+    }, [_id, clickedPostComments.length]);
     // Navigates to Edit Post page
   const handleEditNavigate =()=>{
     navigate(`/api/posts/edit/${_id}`);
@@ -83,6 +90,11 @@ function ViewPost() {
       })
       .catch((error) => {console.log({error: "Failed to create post"})})
   };
+
+  const handleLoggedOutClick = (e) =>{
+        navigate(`/login`)
+  }
+
   return (
     <div>
         <h1>ViewPost</h1>
@@ -97,9 +109,15 @@ function ViewPost() {
             <p>Title: {clickedPostTitle}</p>
             <p>Text: {clickedPostText}</p>
             <p>Image: {clickedPostImg}</p>
-            <p>Author: <Link to="">{clickedPostUser}</Link></p>
-            <button onClick={handleEditNavigate}>Edit</button>
-            <button onClick={handleDeleteButton}>Delete</button>
+            {isAuthenticated ? (<>
+              <p>Author: <Link to="">{clickedPostUser}</Link></p></>):(<>
+              <p>Author: <Link to="/login">{clickedPostUser}</Link></p></>)}
+              {isAuthenticated ? (<>
+                <button onClick={handleEditNavigate}>Edit</button>
+                <button onClick={handleDeleteButton}>Delete</button></>):(<>
+                <button onClick={handleLoggedOutClick}>Edit</button>
+                <button onClick={handleLoggedOutClick}>Delete</button></>)}
+            
           </div>
         }
         </div>
@@ -116,7 +134,10 @@ function ViewPost() {
                   <div key={index}>
                     <p>{post.content}</p>
                     <p>{post.img}</p>
-                    <p>replied by "<a href="">{post.username}</a>"</p>
+                    {isAuthenticated ? (<>
+                    <p>replied by "<a href="">{post.username}</a></p></>):(<>
+                      <p>replied by "<a href="/login">{post.username}</a></p></>)}
+                    
                   </div>
                 )
               })}
@@ -133,7 +154,9 @@ function ViewPost() {
               <label>Image: <input type="img" value={replyImg} onChange={(e)=>setReplyImg(e.target.value)} required /> </label>
             </div>
             <div>
-              <button onClick={handleReplySubmit}>Submit</button>
+            {isAuthenticated ? (<>
+              <button onClick={handleReplySubmit}>Submit</button></>):(<>
+                <button onClick={handleLoggedOutClick}>Submit</button></>)}
             </div>
           </form>
         </div>

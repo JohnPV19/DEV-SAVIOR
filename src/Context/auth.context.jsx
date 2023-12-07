@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
+import authService from "../services/auth.service";
 
 
 const API_URL = "http://localhost:5005";
@@ -22,7 +23,8 @@ export function AuthProviderWrapper(props) {
     const storedToken = localStorage.getItem('authToken');
 
     if (storedToken) {
-      axios.get(`${API_URL}/auth/verify`, { headers: { Authorization: `Bearer ${storedToken}` } })
+      authService
+        .verify()
         .then((response) => {
           const userData = response.data;
           setIsLoggedIn(true);

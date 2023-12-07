@@ -1,29 +1,65 @@
 import '/src/Components/Navbar/index.css'
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import { AuthContext } from '../../Context/auth.context';
+import React, {useContext} from 'react';
 import SearchBar from '../SearchBar';
 
 
 export default function Navbar(){
+
+    const authContext = useContext(AuthContext);
+    const isAuthenticated = authContext.isLoggedIn;
+    const { _id } = authContext.user || {};
+
+    const handleLogOut = () => {
+        authContext.logOut();
+      };
+
     const handleSearch = (searchTerm) => {
         // Handle the search logic in the Navbar component
         console.log('Search term in Navbar:', searchTerm);
         // You can perform other actions with the search term here
       };
 
+
     return (
         <nav>
             <div id="inner-nav">
-                <div id="nav-links">
-                    <Link to="/"> Home </Link>
-                    <Link to="/newpost"> New Post </Link>
-                    <Link to="/api/projects/upload"> NewProjects </Link>
-                    <Link to="/projects"> Projects </Link>
-                    <Link to="/login"> Login </Link>
-                    <Link to="/signup"> SignUp </Link>
-                    <Link to="/profile/:_id"> Profile </Link>
-                    <SearchBar onSearch={handleSearch}/>
+                <div id="nav-links-l">
+                    <div><Link to="/"> Home </Link></div>
+                    {isAuthenticated ? (<>
+                        <div><Link to="/newpost"> New Post </Link></div>
+                        <div><Link to="/api/projects/upload"> NewProjects </Link></div></>
+                    ) : (<>
+                        <div><Link to="/login"> New Post </Link></div>
+                        <div><Link to="/login"> New Projects </Link></div></>
+                        )}
+                </div>
+
+                <div id="logo">
+                    <h2>Logo</h2>
+                </div>
+
+                <div id="nav-links-r">
+                    {isAuthenticated ? (<>
+                        <div><Link to="/projects"> Projects </Link></div>
+                        <div><Link to={`/profile/${_id}`}> Profile </Link></div>
+                        <div><Link onClick={handleLogOut} to="/"> Log Out </Link></div></>
+                         ) : (<>
+                        <div><Link to="/login"> Projects </Link></div>
+                        <div><Link to="/login"> Profile </Link></div>
+                        <div><Link to="/login"> Login </Link></div>
+                        <div><Link to="/signup"> SignUp </Link></div></>
+                        )}
                 </div>
             </div>
-        </nav>
+
+
+            <div id="nav-search">
+                <div>
+                <SearchBar onSearch={handleSearch}/>
+                </div>
+            </div>
+    </nav>
     )
 }

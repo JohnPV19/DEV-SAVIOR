@@ -29,10 +29,11 @@ function NewProject() {
         fileName: file.name,
         content,
         username: username,
+        id: authContext.user._id
       });
 
       const savedProject = response.data;
-
+      console.log("project _id:", response)       // DEBUGGER
     // Now you can navigate or perform other actions
     navigate(`/api/project/${savedProject._id}`);
   }

@@ -1,8 +1,9 @@
 import { useContext, useState } from 'react'; 
 import { AuthContext } from '../../Context/auth.context';
 import axios from 'axios';
-
 import { useNavigate } from 'react-router-dom';
+import authService from '../../services/auth.service';
+
 
 const API_URL = "http://localhost:5005";
 
@@ -20,8 +21,9 @@ function LoginPage(){
 
         const requestBody ={email, password, name};
 
-        axios.post(`${API_URL}/auth/login`,requestBody)
-            .then((response)=>{
+        authService
+        .login(requestBody)
+        .then((response)=>{
                 storeToken(response.data.authToken);
                 authenticateUser();
                 navigate('/')
