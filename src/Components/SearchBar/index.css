@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #searchContainer {
     display: flex;
     align-items: center;
@@ -5,6 +6,9 @@
     right: 20px;
   }
   
+=======
+
+>>>>>>> 733407f414a4be5bb4293211ead4cad62793da5f
   #searchInput {
     padding: 8px;
     margin-right: 10px;
@@ -21,8 +25,8 @@
     border-radius: 4px;
     padding: 5px;
     position: fixed;
-    top: 45px; /* Position it right below the input */
-    right: 20px;
+    top: 55px; /* Position it right below the input */
+    right: 175px;
     background-color: #fff; /* Background color */
   }
   
@@ -38,5 +42,11 @@
   
   #submitButton a {
     text-decoration: none;
-    color: white;
+    color: black;
+  }
+  #suggestionsContainer h3{
+    color: black;
+  }
+  #suggestionsContainer p{
+    color: black;
   }

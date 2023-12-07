@@ -1,11 +1,17 @@
 import { useContext, useState } from 'react'; 
 import { AuthContext } from '../../Context/auth.context';
 import axios from 'axios';
+<<<<<<< HEAD
 import { useNavigate } from 'react-router-dom';
 import authService from '../../services/auth.service';
 
+=======
+import './index.css';
+import { useNavigate } from 'react-router-dom';
+import { Link, useParams } from "react-router-dom";
+>>>>>>> 733407f414a4be5bb4293211ead4cad62793da5f
 
-const API_URL = "http://localhost:5005";
+const API_URL = "https://devhub.adaptable.app";
 
 function LoginPage(){
     const [email, setEmail] = useState("")
@@ -35,8 +41,8 @@ function LoginPage(){
     }
 
     return( 
-        <div>
-            <h3>Login Page</h3>
+        <div id='login-box'>
+            <h1>Login Page</h1>
             <form onSubmit = {handleLoginSubmit}>
                 <div>
                     <label>Email:</label>
@@ -45,6 +51,9 @@ function LoginPage(){
                 <div>
                     <label>Password:</label>
                     <input type="password" name="password" onChange={(e)=> setPassword(e.target.value)} />
+                </div>
+                <div>
+                    <p><Link to="/signup"> Don't have an account?  </Link></p>
                 </div>
                 <div>
                     <button type ="submit">Sign Up</button>

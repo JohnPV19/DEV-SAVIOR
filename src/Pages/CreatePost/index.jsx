@@ -3,11 +3,17 @@ import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/auth.context';
+<<<<<<< HEAD
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 
+=======
+import './index.css';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
+>>>>>>> 733407f414a4be5bb4293211ead4cad62793da5f
 
-const API_URL = "http://localhost:5005";
+const API_URL = "https://devhub.adaptable.app";
 function NewPost() {
   const navigate = useNavigate();
   const authContext = useContext(AuthContext);
@@ -36,11 +42,17 @@ function NewPost() {
       })
       .catch((error) => {console.log({error: "Failed to create post"})})
   };
+<<<<<<< HEAD
 
   const handleChange = (value) => {
     setPostBodyText(value);
   };
 
+=======
+  const handleChange = (value) => {
+    setPostBodyText(value);
+  };
+>>>>>>> 733407f414a4be5bb4293211ead4cad62793da5f
   const modules = {
     toolbar: [
       [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
@@ -54,7 +66,10 @@ function NewPost() {
       ['clean'],
     ],
   };
+<<<<<<< HEAD
 
+=======
+>>>>>>> 733407f414a4be5bb4293211ead4cad62793da5f
   const formats = [
     'header',
     'bold', 'italic', 'underline', 'strike',
@@ -66,6 +81,7 @@ function NewPost() {
     'align',
     'clean',
   ];
+<<<<<<< HEAD
 
 
   return (
@@ -85,7 +101,29 @@ function NewPost() {
             <button type="submit">Submit</button>
           </form>
         </div>
+=======
+  return (
+    <div>
+      <h1 id="newPostTitle">New Post</h1>
+      <div id="postFormContainer">
+        <form onSubmit={handleCreatedPost}>
+          <div id="postTitleField">
+            <label>Title: <input type="text" value={postTitle} onChange={(e) => setPostTitle(e.target.value)} required /> </label>
+          </div>
+          <div>
+            <ReactQuill value={postBodyText} onChange={handleChange} modules={modules} formats={formats} placeholder="Your post here..."/>
+            </div>
+          <div id="postContentField">
+            <label>Content: <input type="text" value={postBodyText} onChange={(e) => setPostBodyText(e.target.value)} required /> </label>
+          </div>
+          <div id="postImageField">
+            <label>Image: <input type="img" value={postImg} onChange={(e) => setPostImg(e.target.value)} /> </label>
+          </div>
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+>>>>>>> 733407f414a4be5bb4293211ead4cad62793da5f
     </div>
-  )
+  );
 }
 export default NewPost

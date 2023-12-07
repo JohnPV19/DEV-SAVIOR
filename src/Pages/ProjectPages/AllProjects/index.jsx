@@ -2,9 +2,9 @@ import React from 'react'
 import axios from 'axios'
 import { useEffect, useState, navigate } from 'react'
 import { Link, useParams } from "react-router-dom"
+import './index.css';
 
-
-const API_URL = "http://localhost:5005";
+const API_URL = "https://devhub.adaptable.app";
 
 
 function Projects() {
@@ -27,27 +27,29 @@ function Projects() {
 
 
   return (
-    <div>
-        <h1>Projects</h1>
-        <h2>All Projects</h2>
-        <div> <div></div>
-          {projectsList &&
-            <div>
-              {projectsList.map((projects, index)=>{
-                return(
-                    <div key={index}>
-                        <div> 
-                          <p>Title: <Link to={`/api/project/${projects._id}`}>{projects.fileName}</Link></p>
-                        </div>
-                        <div>
-                          <p>by: <Link to={`/api/project/${projects._id}`}>{projects.username}</Link></p>
-                        </div>
-                    </div>
-                )
-              })}
-            </div>}
-        </div>
+    <div className="projectsWrapper">
+    <div id="projectsContainer">
+    <h1 id="projectsTitle">Projects</h1>
+    <h2 id="allProjectsTitle">All Projects</h2>
+    <div id="projectsListContainer">
+      {projectsList &&
+        projectsList.map((project, index) => (
+          <div key={index} className="projectItem">
+            <div className="projectDetails">
+              <p>
+                <span>Title: </span>
+                <Link to={`/api/project/${project._id}`}>{project.fileName}</Link>
+              </p>
+              <p>
+                <span>by: </span>
+                <Link to={`/api/project/${project._id}`}>{project.username}</Link>
+              </p>
+            </div>
+          </div>
+        ))}
     </div>
+  </div>
+</div>
   )
 }
 
