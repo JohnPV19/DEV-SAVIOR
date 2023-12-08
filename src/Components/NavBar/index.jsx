@@ -21,7 +21,7 @@ export default function Navbar(){
             <div id="inner-nav">
                 <div id="logo">
                     <Link to="/">
-                    <img src="/images/Snips_logo.png" alt="Snips" width="px" height="auto" /></Link>
+                    <img src="/images/Snips_logo.png" alt="Snips" width="50px" height="50px" /></Link>
                 </div>
                 <div id="nav-links">
                     <div id="left-links">
